@@ -25,43 +25,47 @@
 
 	<div class="bg-contact100" style="background-image: url('images/bg-01.jpg');">
 		<div class="container-contact100">
-			<div class="wrap-contact100">
+		  <div class="wrap-contact100">
 				<div class="contact100-pic js-tilt" data-tilt>
 					<img src="images/Quantumult-246x0w.jpg" alt="IMG" class="rounded">
 				</div>
 
-				<form class="contact100-form validate-form">
+			<form class="contact100-form validate-form">
 					<span class="contact100-form-title"><img src="images/Quantumult-246x0w.jpg" width="91" height="91" class="rounded">
 						Account Quantumult</span>
-
+					
 					<div class="wrap-input100 validate-input" data-validate = "Name is required">
-						<input class="input100" type="text" name="name" value="ios@codevn.net">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-user" aria-hidden="true"></i>
-						</span>
-				  </div>
-
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" value="Codevn2019$">
+					  <input class="input100" type="text" name="email01" value="ios@codevn.net" onclick="this.select()">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate = "Message is required">
-						<input class="input100" name="message" value="Không được đăng nhập vào Icloud">
+				  </div>
+				  <div class="wrap-input100 validate-input" data-validate = "Name is required">
+					  <input class="input100" type="text" name="email02" value="Codevn2019$" onclick="this.select()">
+					  
+					  <span class="focus-input100"></span> <span class="symbol-input100"> <i class="fa fa-user" aria-hidden="true"></i> </span> </div>
+				  <center><p><strong>--------------</strong></p></center>
+				  <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+			  <input class="input100" type="text" name="email" value="tiny.quantumult@icloud.com" onclick="this.select()">
 						<span class="focus-input100"></span>
-					</div>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+				  </div>
 
-					<div class="container-contact100-form-btn">
-						<center><a href="https://m.me/duongkhatx" class="contact100-form-btn">Thông báo ở đây nếu acc bị khóa.</a></center>
-					</div>
+			  <div class="wrap-input100 validate-input" data-validate = "Message is required">
+						<input class="input100" name="message" value="Chiaseacc@2019" onclick="this.select()">
+					<span class="focus-input100"></span> <span class="symbol-input100"> <i class="fa fa-user" aria-hidden="true"></i> </span>
+			    </div>
+
+				  <div class="container-contact100-form-btn">
+					  <center><a href="https://m.me/duongkhatx" class="contact100-form-btn">Thông báo ở đây nếu acc bị khóa.</a></center>
+				  </div>
 			  </form>
-			</div>
-		</div>
-	</div>
+		  </div>
+	  </div>
+</div>
 
 
 
@@ -69,13 +73,13 @@
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/tilt/tilt.jquery.min.js"></script>
-	<script >
+<script >
 		$('.js-tilt').tilt({
 			scale: 1.1
 		})
