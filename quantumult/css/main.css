@@ -191,13 +191,13 @@ iframe {
 }
 
 .contact100-form-title {
-  display: block;
-  font-family: Montserrat-ExtraBold;
-  font-size: 24px;
-  color: #333333;
-  line-height: 1.2;
-  text-align: left;
-  padding-bottom: 36px;
+    display: block;
+    font-family: Montserrat-ExtraBold;
+    font-size: 20px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: left;
+    padding-bottom: 36px;
 }
 
 input.input100 {
