@@ -552,6 +552,12 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
+.carousel-inner .carousel-item .d-block.mw-100 {
+}
+.carousel-inner .carousel-item .d-block.mw-100 {
+}
+
+
 
 @media (min-width: 576px) {
   .container {
@@ -6224,6 +6230,7 @@ a.close.disabled {
 
 .carousel-inner {
   position: relative;
+  margin: auto;
   width: 100%;
   overflow: hidden;
 }
