@@ -174,7 +174,7 @@ a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
 }
 
 a:not([href]):not([tabindex]):focus {
-  outline: 0;
+
 }
 
 pre,
@@ -4932,16 +4932,16 @@ input[type="button"].btn-block {
 }
 
 .badge {
-  display: inline-block;
-  padding: 0.25em 0.4em;
-  font-size: 75%;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -6683,7 +6683,7 @@ button.bg-dark:focus {
 }
 
 .rounded {
-  border-radius: 0.25rem !important;
+    border-radius: 25px !important;
 }
 
 .rounded-top {
@@ -9756,7 +9756,7 @@ button.bg-dark:focus {
 }
 
 .text-left {
-  text-align: left !important;
+    text-align: left !important;
 }
 
 .text-right {
