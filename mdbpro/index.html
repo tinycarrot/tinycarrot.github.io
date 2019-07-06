@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="utf-8">
@@ -16,154 +16,181 @@
   <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
-
-<!-- Start your project here-->
-	
-	<div class="text-center">
-	
-		<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark primary-color">
-
-  <!-- Navbar brand -->
-  <a class="navbar-brand" href="#">Navbar</a>
-
-  <!-- Collapse button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <!-- Collapsible content -->
-  <div class="collapse navbar-collapse" id="basicExampleNav">
-
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-
-      <!-- Dropdown -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-
-    </ul>
-    <!-- Links -->
-
-    <form class="form-inline">
-      <div class="md-form my-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      </div>
-    </form>
-  </div>
-  <!-- Collapsible content -->
-
-</nav>
-<!--/.Navbar-->
-	
-	</div>
-
-  <div class="container" style="max-width: 1366px; background-color: dimgray; padding-top: 15px;padding-bottom: 15px">
-    
-<!--Carousel Wrapper-->
-	  <div class="overflow-auto">
-	  <div class="container" style="max-width: 320px">
-	  <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
-  <!--Indicators-->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-2" data-slide-to="1"></li>
-    <li data-target="#carousel-example-2" data-slide-to="2"></li>
-  </ol>
-  <!--/.Indicators-->
-  <!--Slides-->
-  <div class="carousel-inner" role="listbox">
-    <div class="carousel-item active">
-      <div class="view">
-        <img class="d-block w-100" src="img/IMG_0054.PNG"
-          alt="First slide">
-        <div class="mask rgba-black-slight"></div>
-      </div>
-      <div class="carousel-caption">
-        <h3 class="h3-responsive">PIC 01</h3>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <!--Mask color-->
-      <div class="view">
-        <img class="d-block w-100" src="img/IMG_0055.PNG"
-          alt="Second slide">
-        <div class="mask rgba-black-slight"></div>
-      </div>
-      <div class="carousel-caption">
-        <h3 class="h3-responsive">PIC 02</h3>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <!--Mask color-->
-      <div class="view">
-        <img class="d-block w-100" src="img/IMG_0056.PNG"
-          alt="Third slide">
-        <div class="mask rgba-black-slight"></div>
-      </div>
-      <div class="carousel-caption">
-        <h3 class="h3-responsive">PIC 03</h3>
-      </div>
-    </div>
-  </div>
-  <!--/.Slides-->
-  <!--Controls-->
-  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-  <!--/.Controls-->
-</div>
-	  </div>
-		  </div>
-<!--/.Carousel Wrapper-->
-	  
-	  <hr>
-<!--Jumbotron 1 Wrapper-->	  
-    <div class="jumbotron mt-3 text-center">
-	    <h1 class="display-4">Hello, world!</h1>
-	    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-	    <hr class="my-4">
-	    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-	    <p class="lead"> <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> </p>
-    </div>
-<!--/.Jumbotron 1 Wrapper-->	  
-  </div>
+<body aria-busy="true">
   <!-- Start your project here-->
-
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark" style="">
+    <div class="container"> <a class="navbar-brand" href="#">
+        <i class="fa d-inline fa-lg fa-stop-circle"></i>
+        <b> BRAND</b>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar10">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar10">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"> <a class="nav-link waves-effect waves-light" href="#">Features</a> </li>
+          <li class="nav-item"> <a class="nav-link waves-effect waves-light" href="#">Pricing</a> </li>
+          <li class="nav-item"> <a class="nav-link waves-effect waves-light" href="#">About</a> </li>
+          <li class="nav-item"> <a class="nav-link waves-effect waves-light" href="#">FAQ</a> </li>
+        </ul> <a class="btn navbar-btn ml-md-2 btn-light text-dark waves-effect waves-light">Contact us</a>
+      </div>
+    </div>
+  </nav>
+  <div class="text-center py-5 shadow m-3">
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto col-md-8">
+          <h1 class="mb-3">I lie close to the earth, a thousand unknown plants are noticed by me.</h1>
+          <p class="lead">When, while the lovely valley teems with vapour around me. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Accordion wrapper-->
+  <div class="accordion md-accordion mx-3 shadow" id="accordionEx" role="tablist" aria-multiselectable="true">
+    <!-- Accordion card -->
+    <div class="card">
+      <!-- Card header -->
+      <div class="card-header py-2 px-3" role="tab" id="headingOne1">
+        <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1" class="">
+          <div class="d-flex align-items-center justify-content-start">
+            <img class="img-fluid d-block float-left rounded-circle" src="img/apps/vsco-246x0w.jpg" width="61px" height="61px">
+            <h5 class="mx-3 mb-0"> VSCO </h5>
+            <i class="fas fa-angle-down rotate-icon"></i>
+          </div>
+        </a>
+      </div>
+      <!-- Card body -->
+      <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx" style="">
+        <div class="card-body m-0 px-3 py-0">
+          <!-- Vertical Steppers -->
+          <div class="row mt-1">
+            <div class="col-md-12">
+              <!-- Stepers Wrapper -->
+              <ul class="stepper stepper-vertical">
+                <!-- First Step -->
+                  <p>Sau khi cài đặt các bước đầy đủ, để kích hoạt VSCO X hãy thực hiện các bước dưới đây.</p>
+                <li class="completed">
+                  <a href="#!">
+                    <span class="circle">1</span>
+                    <span class="label">Bước 1</span>
+                  </a>
+                  <div class="step-content grey lighten-3">
+                    <p>Bật VPN trong ứng dụng Quantumult</p>
+                  </div>
+                </li>
+                <!-- Second Step -->
+                <li class="active">
+                  <!--Section Title -->
+                  <a href="#!">
+                    <span class="circle">2</span>
+                    <span class="label">Bước 2</span>
+                  </a>
+                  <!-- Section Description -->
+                  <div class="step-content grey lighten-3">
+                    <p>Mở VSCO lên &gt; Ấn vào tab user <em class="far fa-smile-beam"></em> trên thanh tab bar &gt; Ấn tiếp vào Setting <em class="fas fa-cog"></em> ở góc trên bên trái &gt;&nbsp; ấn vào Sign out &gt; Thoát app.</p>
+                  </div>
+                </li>
+                <!-- Third Step -->
+                <li class="active"> 
+                    <a href="#!">
+                    <span class="circle">3</span>
+                    <span class="label">Bước 3</span>
+                  </a>
+                    <!-- Section Description -->
+                  <div class="step-content grey lighten-3">
+                    <p>Mở lại VSCO &gt; Ấn vào tab user <em class="far fa-smile-beam"></em> trên thanh tab bar &gt; Login vào account VSCO</p>
+                  </div>
+                </li>
+                <!-- Fourth Step -->
+                <li class="warning"> 
+                    <a href="#!"> <span class="circle">4</span> <span class="label">Bước 4 - Kiểm tra</span>
+                    </a> 
+                  <!-- Section Description -->
+                  <div class="step-content grey lighten-3">
+                    <p>Sau khi vừa đăng nhập xong, đợi khoảng 10s qía trình kích hoạt sẽ hoàn tất.<br>Có thể kiểm tra bằng cách ấn vào tab <em class="far fa-smile-beam"></em> &gt; ấn tiếp vào Setting <em class="fas fa-cog"></em> ở góc trên bên trái, trong mục Membership sẽ hiện VSCO Membership.
+                    <hr>
+                    <p><span class="badge badge-warning badge-pill py-1">Lưu Ý</span> Nếu quá trình kích hoạt không thành công thì đợi 1 lúc rồi thực hiện lại hoặc:</p>
+                      </p>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-auto "><a href="https://m.me/duongkhatx" target="_blank" class="btn btn-outline-danger btn-rounded btn-sm text-center">Thông Báo lỗi</a>
+                        </div>
+                        <div class="col-auto"><a href="#!" class="btn btn-outline-info btn-rounded btn-sm">Xem lại các bước cài đặt</a></div>
+                        <div class="col-auto"><a href="#!" class="btn btn-outline-warning btn-rounded btn-sm">Kiểm tra tình trạng server</a></div>
+                        
+                        
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <!-- /.Stepers Wrapper -->
+            </div>
+          </div>
+          <!-- /.Vertical Steppers -->
+          
+        <div class="overflow-auto">
+          <ul class="list-group list-group-horizontal">
+  <li class="list-group-item"><img src="img/apps/300x0w.jpg" class="img" alt="Placeholder image" style="width: 181px"></li>
+  <li class="list-group-item"><img src="img/apps/300x0w.jpg" class="img" alt="Placeholder image" style="width: 181px"></li>
+  <li class="list-group-item"><img src="img/apps/300x0w.jpg" class="img" alt="Placeholder image" style="width: 181px"></li>
+                <li class="list-group-item"><img src="img/apps/300x0w.jpg" class="img" alt="Placeholder image" style="width: 181px"></li>
+                <li class="list-group-item"><img src="img/apps/300x0w.jpg" class="img" alt="Placeholder image" style="width: 181px"></li>
+                <li class="list-group-item"><img src="img/apps/300x0w.jpg" class="img" alt="Placeholder image" style="width: 181px"></li>
+                <li class="list-group-item"><img src="img/apps/300x0w.jpg" class="img" alt="Placeholder image" style="width: 181px"></li>
+</ul>
+        </div>
+        
+        
+        </div>
+      </div>
+    </div>
+    <!-- Accordion card -->
+    <!-- Accordion card -->
+    <div class="card">
+      <!-- Card header -->
+      <div class="card-header py-2 px-3" role="tab" id="headingTwo2">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+          <div class="d-flex align-items-center justify-content-start">
+            <img class="img-fluid d-block float-left rounded-circle" src="img/apps/drops-246x0w.jpg" width="61px" height="61px">
+            <h5 class="mx-3 mb-0"> DROPS </h5>
+            <i class="fas fa-angle-down rotate-icon"></i>
+          </div>
+        </a>
+      </div>
+      <!-- Card body -->
+      <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx" style="">
+        <div class="card-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. </div>
+      </div>
+    </div>
+    <!-- Accordion card -->
+    <!-- Accordion card -->
+    <div class="card">
+      <!-- Card header -->
+      <div class="card-header" role="tab" id="headingThree3">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
+          <h5 class="mb-0"> Collapsible Group Item #3 <i class="fas fa-angle-down rotate-icon"></i>
+          </h5>
+        </a>
+      </div>
+      <!-- Card body -->
+      <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3" data-parent="#accordionEx" style="">
+        <div class="card-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. </div>
+      </div>
+    </div>
+    <!-- Accordion card -->
+  </div>
+  <!-- Accordion wrapper -->
+  <!-- Start your project here-->
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js" style=""></script>
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
+  <div class="hiddendiv common"></div>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
 </body>
 
 </html>
