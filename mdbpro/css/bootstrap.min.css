@@ -15,7 +15,7 @@ svg{overflow:hidden;vertical-align:middle}table{border-collapse:collapse}caption
     display: block;
     padding: 0.5rem;
     margin-bottom: -1px;
-    background-color: #fff;
+    /* [disabled]background-color: #fff; */
     /* [disabled]border: 1px solid rgba(0,0,0,.125); */
 }.list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}.list-group-item:last-child{margin-bottom:0;border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}.list-group-item.disabled,.list-group-item:disabled{color:#6c757d;pointer-events:none;background-color:#fff}.list-group-item.active{z-index:2;color:#fff;background-color:#007bff;border-color:#007bff}.list-group-horizontal{-ms-flex-direction:row;flex-direction:row}.list-group-horizontal .list-group-item{
     margin-right: -1px;
