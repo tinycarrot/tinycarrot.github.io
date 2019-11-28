@@ -1,9 +1,9 @@
 // Cards basic
 .card {
   &.card-image {
-    background-size: cover;
-    background-position: center;
     width: 100%;
+    background-position: center;
+    background-size: cover;
     [class*="rgba-"] {
       border-radius: $md-card-border-radius;
     }
@@ -12,11 +12,11 @@
   &.card-cascade {
     .view {
       &.view-cascade {
-        box-shadow: $z-depth-1-half;
         border-radius: $md-card-border-radius;
+        box-shadow: $z-depth-1-half;
         &.gradient-card-header {
-          @extend .white-text;
           padding: $card-cascade-header-gradient-py $card-cascade-header-gradient-px;
+          color: $white-base;
           text-align: center;
           .card-header-title {
             font-weight: 500;
@@ -28,8 +28,8 @@
       }
     }
     &.wider {
-      box-shadow: none;
       background-color: transparent;
+      box-shadow: none;
       .view {
         &.view-cascade {
           z-index: 2;
@@ -37,15 +37,15 @@
       }
       .card-body {
         &.card-body-cascade {
-          box-shadow: $z-depth-1;
-          margin-left: $card-cascade-wider-card-body-mx;
-          margin-right: $card-cascade-wider-card-body-mx;
-          background: $card-cascade-wider-card-body-bg;
           z-index: 1;
+          margin-right: $card-cascade-wider-card-body-mx;
+          margin-left: $card-cascade-wider-card-body-mx;
+          background: $card-cascade-wider-card-body-bg;
           border-radius: 0 0 $md-card-border-radius $md-card-border-radius;
+          box-shadow: $z-depth-1;
           .card-footer {
-            margin-left: -1.25rem;
             margin-right: -1.25rem;
+            margin-left: -1.25rem;
           }
         }
       }
@@ -67,23 +67,6 @@
           margin-left: $card-cascade-narrowe-view-mx;
           margin-right: $card-cascade-narrowe-view-mx;
           margin-top: $card-cascade-narrower-view-mt;
-        }
-      }
-    }
-    &.panel-cascade {
-      .view {
-        text-align: center;
-        color: $panel-cascade-view-color;
-      }
-      .list-group {
-        .list-group-item {
-          margin-bottom: 0;
-          border: 0;
-          border-bottom: 1px solid $panel-cascade-list-group-item-border-bottom;
-          color: $panel-cascade-list-group-item-color;
-          &:hover {
-            background-color: $panel-cascade-list-group-item-bgc;
-          }
         }
       }
     }
@@ -118,15 +101,15 @@
       position: absolute;
       top: $card-share-social-reveal-top;
       right: $card-share-social-reveal-right;
-      visibility: hidden;
+      opacity: 0;
       width: auto;
       transform: translateZ(0);
-      transform: translateX(0);
+      transform: translateX(80px);
       transition: $card-share-social-reveal-transition;
     }
     .social-reveal-active {
       z-index: 11;
-      visibility: visible;
+      opacity: 1;
       transform: translateZ(0);
       transform: translateX(-48px);
       transition: $card-share-social-reveal-transition;

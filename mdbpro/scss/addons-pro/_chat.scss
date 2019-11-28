@@ -26,6 +26,20 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     width: 20rem;
+    &.slim {
+      height: 3rem;
+      .icons {
+        .feature {
+          display: none;
+        }
+      }
+      .my-custom-scrollbar {
+        display: none;
+      }
+      .card-footer {
+        display: none;
+      }
+    }
     .profile-photo {
       img {
         &.avatar {

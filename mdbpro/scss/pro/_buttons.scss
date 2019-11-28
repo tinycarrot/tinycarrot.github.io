@@ -2,9 +2,9 @@
 .btn {
   &.btn-flat {
     font-weight: 500;
-    box-shadow: none;
-    background-color: transparent;
     color: inherit;
+    background-color: transparent;
+    box-shadow: none;
     &:not([disabled]):not(.disabled):active {
       box-shadow: none;
     }
@@ -14,7 +14,6 @@
 // Floating button
 .btn-floating {
   box-shadow: $z-depth-1-half;
-  @include make-btn-floating($btn-floating-width, $btn-floating-height, $btn-floating-icon-size, $btn-floating-line-height);
   position: relative;
   z-index: 1;
   vertical-align: middle;
@@ -25,6 +24,7 @@
   border-radius: $btn-floating-border-radius;
   padding: 0;
   cursor: pointer;
+  @include make-btn-floating($btn-floating-width, $btn-floating-height, $btn-floating-icon-size, $btn-floating-line-height);
   i {
     display: inline-block;
     width: inherit;
@@ -96,9 +96,4 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 // Rounded buttons
 .btn-rounded {
   border-radius: $btn-rounded-border-radius;
-}
-
-// Gradient buttons
-@each $name, $val in $gradients {
-  @include make-gradient-button($name, $val);
 }

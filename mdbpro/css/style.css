@@ -1,0 +1,10 @@
+body{
+    background: #212121;
+    color: #CCCCCC;
+}
+
+@media screen{
+.icon {
+	border-radius: 1rem;
+}
+}

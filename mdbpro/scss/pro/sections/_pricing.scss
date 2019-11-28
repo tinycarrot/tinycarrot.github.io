@@ -2,8 +2,8 @@
 .pricing-card {
   text-align: center;
   ul {
-    list-style-type: none;
     padding: 0;
+    list-style-type: none;
   }
   .header {
     box-shadow: $z-depth-1-half;
@@ -17,38 +17,38 @@
     position: relative;
     padding-top: $pricing-card-price-padding-top;
     .number {
-      font-size: $pricing-card-number-font-size;
       padding: $pricing-card-number-padding;
+      font-size: $pricing-card-number-font-size;
       font-weight: 300;
-      &:before {
-        content: "$";
+      &::before {
         position: absolute;
-        font-size: $pricing-card-number-before-font-size;
-        margin-left: $pricing-card-number-before-margin-left;
         margin-top: $pricing-card-number-before-margin-top;
+        margin-left: $pricing-card-number-before-margin-left;
+        font-size: $pricing-card-number-before-font-size;
+        content: "$";
       }
-      &:after {
-        content: "/mo";
+      &::after {
         position: absolute;
-        font-size: $pricing-card-number-after-font-size;
         margin-top: $pricing-card-number-after-margin-top;
+        font-size: $pricing-card-number-after-font-size;
+        content: "/mo";
       }
     }
     .version {
-      box-shadow: $z-depth-1;
-      border-radius: $md-card-border-radius $md-card-border-radius 0 0;
       position: absolute;
       top: 0;
       width: 100%;
       padding: $pricing-card-version-padding;
       background-color: $pricing-card-version-bgc;
+      border-radius: $md-card-border-radius $md-card-border-radius 0 0;
+      box-shadow: $z-depth-1;
     }
   }
   .striped {
     padding: $pricing-card-striped-padding;
     li {
-      border-bottom: 1px solid $pricing-card-striped-li-border-bottom-color;
       margin-bottom: $pricing-card-striped-li-margin-bottom;
+      border-bottom: 1px solid $pricing-card-striped-li-border-bottom-color;
     }
     &.green-striped {
       li {
@@ -80,11 +80,13 @@
 // Additional pricing cards
 .card {
   .card-circle {
-    border: 2px solid $pricing-card-circle-border-color;
-    height: $pricing-card-circle-height;
     width: $pricing-card-circle-width;
+    height: $pricing-card-circle-height;
+    border: 2px solid $pricing-card-circle-border-color;
     border-radius: $pricing-card-circle-border-radius;
-    .fas, .fab, .far {
+    .fas,
+    .fab,
+    .far {
       font-size: $pricing-card-circle-icon-font-size;
     }
   }

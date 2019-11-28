@@ -18,6 +18,14 @@ label.btn input[type="checkbox"] {
     height: $checkbox-label-height;
     line-height: $checkbox-label-line-height;
     user-select: none;
+    &.form-check-label-left{
+      padding: 0 35px 0 0 !important;
+      &:before{
+        left: 100% !important;
+        right: 0;
+        transform: translateX(-100%);
+      }
+    }
   }
 
   // Checkbox feature
@@ -47,20 +55,27 @@ label.btn input[type="checkbox"] {
   }
 
   &:checked {
-    + label:before {
-      top: $checkbox-checked-label-before-top;
-      left: $checkbox-checked-label-before-left;
-      width: $checkbox-checked-label-before-width;
-      height: $checkbox-checked-label-before-height;
-      border-top: $checkbox-label-before-after-border-width solid transparent;
-      border-left: $checkbox-label-before-after-border-width solid transparent;
-      border-right: $checkbox-label-before-after-border-width solid $radio-fill-color;
-      border-bottom: $checkbox-label-before-after-border-width solid $radio-fill-color;
-      transform: $checkbox-checked-label-before-transform;
-      backface-visibility: hidden;
-      transform-origin: $checkbox-checked-label-before-transform-origin;
+    + label {
+      &:before{top: $checkbox-checked-label-before-top;
+        left: $checkbox-checked-label-before-left;
+        width: $checkbox-checked-label-before-width;
+        height: $checkbox-checked-label-before-height;
+        border-top: $checkbox-label-before-after-border-width solid transparent;
+        border-left: $checkbox-label-before-after-border-width solid transparent;
+        border-right: $checkbox-label-before-after-border-width solid $radio-fill-color;
+        border-bottom: $checkbox-label-before-after-border-width solid $radio-fill-color;
+        transform: $checkbox-checked-label-before-transform;
+        backface-visibility: hidden;
+        transform-origin: $checkbox-checked-label-before-transform-origin;
+      }
+      &.form-check-label-left{
+        &:before{
+          transform: translateX(0) rotateZ(40deg);
+          transform-origin: 0 0;
+        }
+      }
     }
-
+    
     &:disabled + label:before {
       border-right: $checkbox-label-before-after-border-width solid $input-disabled-solid-color;
       border-bottom: $checkbox-label-before-after-border-width solid $input-disabled-solid-color;
@@ -69,18 +84,26 @@ label.btn input[type="checkbox"] {
 
   // Indeterminate checkbox
   &:indeterminate {
-    + label:before {
-      top: $checkbox-indeterminate-label-before-top;
-      left: $checkbox-indeterminate-label-before-left;
-      width: $checkbox-indeterminate-label-before-width;
-      height: $checkbox-indeterminate-label-before-height;
-      border-top: none;
-      border-left: none;
-      border-right: $checkbox-label-before-after-border-width solid $radio-fill-color;
-      border-bottom: none;
-      transform: $checkbox-indeterminate-label-before-transform;
-      backface-visibility: hidden;
-      transform-origin: $checkbox-checked-label-before-transform-origin;
+    + label{
+      &:before {
+        top: $checkbox-indeterminate-label-before-top;
+        left: $checkbox-indeterminate-label-before-left;
+        width: $checkbox-indeterminate-label-before-width;
+        height: $checkbox-indeterminate-label-before-height;
+        border-top: none;
+        border-left: none;
+        border-right: $checkbox-label-before-after-border-width solid $radio-fill-color;
+        border-bottom: none;
+        transform: $checkbox-indeterminate-label-before-transform;
+        backface-visibility: hidden;
+        transform-origin: $checkbox-checked-label-before-transform-origin;
+      }
+      &.form-check-label-left{
+        &:before{
+          top:0;
+          transform-origin: 0 0;
+        }
+      }
     }
 
     &:disabled + label:before {

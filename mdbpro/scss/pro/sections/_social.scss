@@ -1,5 +1,9 @@
 // Social section
+
 // Feed
+// stylelint-disable selector-max-class
+// stylelint-disable selector-max-combinators
+// stylelint-disable selector-max-compound-selectors
 .mdb-feed {
   .news {
     display: flex;
@@ -17,10 +21,10 @@
       display: block;
       flex: 1 1 auto;
       align-self: stretch;
-      word-wrap: break-word;
       margin: 0 0 1.2rem 1.2rem;
+      word-wrap: break-word;
       .brief {
-        padding-bottom: 0.5rem;
+        padding-bottom: .5rem;
         font-weight: 500;
         a {
           color: $primary-color;
@@ -32,58 +36,64 @@
         .date {
           display: inline-block;
           float: none;
-          padding-left: 0.7rem;
+          padding-left: .7rem;
+          font-size: .86rem;
           font-weight: 300;
-          font-size: 0.86rem;
           color: $grey-base;
         }
       }
       .added-images {
-        margin-bottom: 0.6rem;
+        margin-bottom: .6rem;
         img {
           display: inline-block;
-          margin-right: 0.3rem;
           width: 7rem;
+          margin-right: .3rem;
         }
       }
       .added-text {
-        margin-bottom: 0.6rem;
         max-width: 450px;
+        margin-bottom: .6rem;
       }
       .feed-footer {
         .like {
+          font-size: .86rem;
           font-weight: 300;
-          font-size: 0.86rem;
           color: $grey-base;
           &:hover {
-            .fas, .fab, .far {
+            .fas,
+            .fab,
+            .far {
               color: $red-base;
-              transition: 0.4s;
+              transition: .4s;
             }
             span {
               color: $black-base;
-              transition: 0.4s;
+              transition: .4s;
             }
           }
-          .fas, .fab, .far {
-            padding-right: 0.5rem;
+          .fas,
+          .fab,
+          .far {
+            padding-right: .5rem;
           }
         }
         span a {
-          padding-right: 0.3rem;
+          padding-right: .3rem;
           color: $primary-color;
           cursor: default;
         }
         .thumbs {
-          .fas, .fab, .far {
+          .fas,
+          .fab,
+          .far {
             color: $grey-base;
-            transition: 0.4s;
+            transition: .4s;
             &:hover {
               color: $grey-darken-1;
             }
           }
           .fa-thumbs-up {
-            padding-right: 0.3rem;
+            padding-right: .3rem;
           }
         }
         .comment {
@@ -98,27 +108,27 @@
 .card-personal {
   .card-body {
     .card-title {
+      margin-bottom: .3rem;
       font-weight: 400;
       &.title-one {
-        transition: 0.4s;
+        transition: .4s;
         &:hover {
           color: $primary-color;
         }
       }
     }
-    .card-title {
-      margin-bottom: 0.3rem;
-    }
     .card-meta {
+      font-size: .86rem;
       font-weight: 300;
-      font-size: 0.86rem;
       color: $grey-darken-1;
-      .fas, .fab, .far {
-        padding-right: 0.5rem;
+      .fas,
+      .fab,
+      .far {
+        padding-right: .5rem;
       }
     }
     span {
-      transition: 0.5s;
+      transition: .5s;
       &:hover {
         color: $primary-color;
       }
@@ -131,29 +141,31 @@
   .content {
     .right-side-meta {
       float: right;
+      margin-top: .3rem;
       font-weight: 300;
       color: $grey-base;
-      margin-top: 0.3rem;
     }
     .avatar-img {
       width: 2rem;
       margin-right: 1rem;
     }
     img {
-      border-radius: 50%;
       display: inline-block;
-      vertical-align: middle;
       max-width: 100%;
+      vertical-align: middle;
+      border-radius: 50%;
     }
   }
   .social-meta {
-    .fas, .fab, .far {
-      padding-right: 0.6rem;
+    .fas,
+    .fab,
+    .far {
+      padding-right: .6rem;
     }
     .fa-heart-o {
-      cursor: pointer;
       color: rgba($black-base, .4);
-      transition: 0.53s;
+      cursor: pointer;
+      transition: .53s;
       &:hover {
         color: $red-base;
       }
@@ -164,13 +176,13 @@
   }
   .md-form {
     margin-top: 1.3rem;
-    margin-bottom: 0.3rem;
+    margin-bottom: .3rem;
     .prefix {
+      margin-left: .2rem;
       font-size: 1.5rem;
-      margin-left: 0.2rem;
       color: rgba($black-base, .4);
-      ~input,
-      .md-form .prefix~textarea {
+      ~ input,
+      .md-form .prefix ~ textarea {
         width: calc(100% - 4rem);
       }
     }
@@ -178,11 +190,11 @@
       color: rgba($black-base, .4);
     }
     .form-control {
-      padding-top: 0;
-      padding-bottom: 0.5rem;
-      margin-left: 3rem;
-      margin-bottom: 0;
       height: 1.3rem;
+      padding-top: 0;
+      padding-bottom: .5rem;
+      margin-bottom: 0;
+      margin-left: 3rem;
       border-bottom: 1px solid rgba($black-base, .1);
     }
   }

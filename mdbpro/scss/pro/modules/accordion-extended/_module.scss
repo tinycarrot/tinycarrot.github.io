@@ -1,7 +1,9 @@
 // Accordion extended
 .accordion-gradient-bcg {
-  background: linear-gradient(45deg, rgba(234, 21, 129, 0.6), rgba(10, 23, 187, 0.6) 100%);
+  background: linear-gradient(45deg, rgba(234, 21, 129, .6), rgba(10, 23, 187, .6) 100%);
 }
+
+// stylelint-disable selector-max-class
 .accordion {
   &.md-accordion {
     // Font
@@ -46,7 +48,9 @@
     // With icons
     &.accordion-3 {
       border-radius: 3px;
-      .fas, .fab, .far {
+      .fas,
+      .fab,
+      .far {
         &.fa-angle-down {
           margin-top: -10px;
         }
@@ -71,10 +75,12 @@
           background-color: #f44336;
           transition: .3s;
           &:hover {
-            transition: .3s;
             background-color: #455a64;
+            transition: .3s;
           }
-          .fas, .fab, .far {
+          .fas,
+          .fab,
+          .far {
             background-color: #fff;
             border-top-left-radius: 3px;
           }
@@ -89,7 +95,7 @@
     &.accordion-blocks {
       .card {
         margin-bottom: 1.2rem;
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
         .card-body {
           border-top: 1px solid #eee;
         }

@@ -1,9 +1,8 @@
 /*
- * MDBootstrap easyPieChart.js integration
- * Learn more: https://mdbootstrap.com/docs/jquery/javascript/charts/
+ * MDBootstrap simple-charts.js integration
+ * Learn more: https://mdbootstrap.com/plugins/jquery/simple-charts/
  * About MDBootstrap: https://mdbootstrap.com/
  */
-/*** Global ***/
 .min-chart {
   position: relative;
   display: inline-block;
@@ -17,10 +16,10 @@
     top: 0;
     left: 0; }
   .min-chart .percent {
+    z-index: 2;
     display: inline-block;
-    line-height: 110px;
-    z-index: 2; }
-    .min-chart .percent:after {
-      content: "%";
+    line-height: 110px; }
+    .min-chart .percent::after {
       margin-left: 0.1em;
-      font-size: 0.8rem; }
+      font-size: 0.8rem;
+      content: "%"; }

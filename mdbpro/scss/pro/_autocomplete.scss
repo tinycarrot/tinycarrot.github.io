@@ -51,6 +51,9 @@ button {
     &:hover {
       background: $autocomplete-wrap-li-hover-bg;
     }
+    &.selected {
+      background-color: $autocomplete-wrap-li-hover-bg;
+    }
   }
 }
 

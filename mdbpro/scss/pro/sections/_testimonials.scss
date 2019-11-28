@@ -1,29 +1,29 @@
 // Testimonials section
 .testimonial-carousel {
   .carousel-control {
-    background-image: none;
     top: $testimonial-carousel-control-top;
+    background-image: none;
     transform: $testimonial-carousel-control-transform;
-    &:before {
+    &::before {
       font-size: $testimonial-carousel-control-font-size;
       color: $testimonial-carousel-control-color;
       transition: $testimonial-carousel-control-hover-transition;
     }
     &:hover {
-      &:before {
+      &::before {
         color: $testimonial-carousel-control-hover-color;
         transition: $testimonial-carousel-control-hover-transition;
       }
     }
     &.left {
       left: $testimonial-carousel-control-mx;
-      &:before {
+      &::before {
         content: "\2039";
       }
     }
     &.right {
       right: $testimonial-carousel-control-mx;
-      &:before {
+      &::before {
         content: "\203a";
       }
     }
@@ -33,8 +33,8 @@
     margin-left: $testimonial-carousel-mx;
     .avatar {
       img {
-        box-shadow: $z-depth-1-half;
         max-width: $testimonial-carousel-avatar-max-width;
+        box-shadow: $z-depth-1-half;
       }
     }
   }

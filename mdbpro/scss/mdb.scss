@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB PRO 4.8.2
+ * Version: MDB PRO 4.8.10
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -71,6 +71,7 @@
 // @import "addons/directives";
 // @import "addons/hierarchical-display";
 // @import "addons/flags";
+// @import "addons/rating";
 
 // PRO
 @import "pro/variables";
@@ -102,7 +103,6 @@
 @import "pro/blog";
 @import "pro/toasts";
 @import "pro/animations";
-@import "pro/modules/charts/module";
 @import "pro/progress";
 @import "pro/scrollbar";
 @import "pro/modules/megamenu/module";
@@ -131,6 +131,7 @@
 // @import "addons-pro/timeline";
 // @import "addons-pro/cards-extended";
 // @import "addons-pro/chat";
+// @import "addons-pro/charts/module";
 
 // Your custom styles
 @import "custom-styles";

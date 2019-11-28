@@ -1,23 +1,24 @@
-/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.com | MIT license */
+/*! PhotoSwipe main cSS by dmitry Semenov | photoswipe.com | MIT license */
 
 /*
   Styles for basic PhotoSwipe functionality (sliding area, open/close transitions)
 */
 
-// PhotoSwipe uses Autoprefixer, so vendor prefixed are added automatically when needed.
+// PhotoSwipe uses autoprefixer, so vendor prefixed are added automatically when needed.
 
 /* pswp = photoswipe */
 
 .pswp {
-  display: none;
   position: absolute;
+  top: 0;
+  left: 0;
+  z-index: $pswp__root-z-index;
+  display: none;
   width: 100%;
   height: 100%;
-  left: 0;
-  top: 0;
   overflow: hidden;
   touch-action: none;
-  z-index: $pswp__root-z-index;
+
   /* create separate layer, to avoid paint on window.onscroll in webkit/blink */
   outline: none;
   @if $pswp__box-sizing-border-box==true {
@@ -34,9 +35,10 @@
 /* style is added when JS option showHideOpacity is set to true */
 
 .pswp--animate_opacity {
-  /* 0.001, because opacity:0 doesn't trigger Paint action, which causes lag at start of transition */
-  opacity: 0.001;
+  /* .001, because opacity:0 doesn't trigger Paint action, which causes lag at start of transition */
+  opacity: .001;
   will-change: opacity;
+
   /* for open/close transition */
   transition: opacity $pswp__show-hide-transition-duration cubic-bezier(.4, 0, .22, 1);
 }
@@ -62,25 +64,28 @@
 
 
 /*
-  Background is added as a separate element.
-  As animating opacity is much faster than animating rgba() background-color.
+  background is added as a separate element.
+  as animating opacity is much faster than animating rgba() background-color.
 */
 
 .pswp__bg {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: $pswp__background-color;
   opacity: 0;
   will-change: opacity;
+
+  /* for open/close transition */
+  transition: opacity $pswp__show-hide-transition-duration cubic-bezier(.4, 0, .22, 1);
 }
 
 .pswp__scroll-wrap {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -88,12 +93,12 @@
 
 .pswp__container,
 .pswp__zoom-wrap {
-  touch-action: none;
   position: absolute;
-  left: 0;
-  right: 0;
   top: 0;
+  right: 0;
   bottom: 0;
+  left: 0;
+  touch-action: none;
 }
 
 
@@ -109,15 +114,10 @@
 .pswp__zoom-wrap {
   position: absolute;
   width: 100%;
-  transform-origin: left top;
+
   /* for open/close transition */
   transition: transform $pswp__show-hide-transition-duration cubic-bezier(.4, 0, .22, 1);
-}
-
-.pswp__bg {
-  will-change: opacity;
-  /* for open/close transition */
-  transition: opacity $pswp__show-hide-transition-duration cubic-bezier(.4, 0, .22, 1);
+  transform-origin: left top;
 }
 
 .pswp--animated-in {
@@ -127,25 +127,25 @@
   }
 }
 
-.pswp__container,
-.pswp__zoom-wrap {
-}
+// .pswp__container,
+// .pswp__zoom-wrap {
+// }
 
 .pswp__item {
   position: absolute;
-  left: 0;
-  right: 0;
   top: 0;
+  right: 0;
   bottom: 0;
+  left: 0;
   overflow: hidden;
 }
 
 .pswp__img {
   position: absolute;
-  width: auto;
-  height: auto;
   top: 0;
   left: 0;
+  width: auto;
+  height: auto;
 }
 
 
@@ -154,8 +154,8 @@
   style is added to avoid flickering in webkit/blink when layers overlap
 */
 
-.pswp__img--placeholder {
-}
+// .pswp__img--placeholder {
+// }
 
 
 /*
@@ -168,28 +168,28 @@
 }
 
 .pswp--ie .pswp__img {
-  width: 100% !important;
-  height: auto !important;
-  left: 0;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
 }
 
 
 /*
-  Error message appears when image is not loaded
+  error message appears when image is not loaded
   (JS option errorMsg controls markup)
 */
 
 .pswp__error-msg {
   position: absolute;
-  left: 0;
   top: 50%;
+  left: 0;
   width: 100%;
-  text-align: center;
+  margin-top: -8px;
   font-size: 14px;
   line-height: 16px;
-  margin-top: -8px;
   color: $pswp__error-text-color;
+  text-align: center;
 }
 
 .pswp__error-msg a {
@@ -198,27 +198,27 @@
 }
 
 
-/*! PhotoSwipe Default UI CSS by Dmitry Semenov | photoswipe.com | MIT license */
+/*! PhotoSwipe default UI cSS by dmitry Semenov | photoswipe.com | MIT license */
 
 
 /*
 
-  Contents:
+  contents:
 
-  1. Buttons
+  1. buttons
   2. Share modal and links
   3. Index indicator ("1 of X" counter)
-  4. Caption
+  4. caption
   5. Loading indicator
-  6. Additional styles (root element, top bar, idle state, hidden state, etc.)
+  6. additional styles (root element, top bar, idle state, hidden state, etc.)
 
 */
 
-// PhotoSwipe uses Autoprefixer, so vendor prefixed are added automatically when needed.
+// PhotoSwipe uses autoprefixer, so vendor prefixed are added automatically when needed.
 
 /*
 
-  1. Buttons
+  1. buttons
 
  */
 
@@ -226,31 +226,31 @@
 /* <button> css reset */
 
 .pswp__button {
+  position: relative;
+  display: block;
+  float: right;
   width: 44px;
   height: 44px;
-  position: relative;
-  background: none;
-  cursor: pointer;
-  overflow: visible;
-  display: block;
-  border: 0;
   padding: 0;
   margin: 0;
-  float: right;
-  opacity: 0.75;
-  transition: opacity 0.2s;
+  overflow: visible;
+  cursor: pointer;
+  background: none;
+  border: 0;
   box-shadow: none;
+  opacity: .75;
+  transition: opacity .2s;
   &:focus,
   &:hover {
     opacity: 1;
   }
   &:active {
     outline: none;
-    opacity: 0.9;
+    opacity: .9;
   }
   &::-moz-focus-inner {
     padding: 0;
-    border: 0
+    border: 0;
   }
 }
 
@@ -262,21 +262,22 @@
 }
 
 .pswp__button,
-.pswp__button--arrow--left:before,
-.pswp__button--arrow--right:before {
-  background: $pswp__button-background 0 0 no-repeat;
-  background-size: 264px 88px;
+.pswp__button--arrow--left::before,
+.pswp__button--arrow--right::before {
   width: 44px;
   height: 44px;
+  background: $pswp__button-background 0 0 no-repeat;
+  background-size: 264px 88px;
 }
 
+// stylelint-disable-next-line media-feature-name-no-vendor-prefix
 @media (-webkit-min-device-pixel-ratio: 1.1),
   (min-resolution: 105dpi),
   (min-resolution: 1.1dppx) {
   /* Serve SVG sprite if browser supports SVG and resolution is more than 105dpi */
   .pswp--svg .pswp__button,
-  .pswp--svg .pswp__button--arrow--left:before,
-  .pswp--svg .pswp__button--arrow--right:before {
+  .pswp--svg .pswp__button--arrow--left::before,
+  .pswp--svg .pswp__button--arrow--right::before {
     background-image: $pswp__button-background-image;
   }
   .pswp--svg .pswp__button--arrow--left,
@@ -330,18 +331,18 @@
 
 
 /*
-  Arrow buttons hit area
+  arrow buttons hit area
   (icon is added to :before pseudo-element)
 */
 
 .pswp__button--arrow--left,
 .pswp__button--arrow--right {
-  background: none;
+  position: absolute;
   top: 50%;
-  margin-top: -50px;
   width: 70px;
   height: 100px;
-  position: absolute;
+  margin-top: -50px;
+  background: none;
 }
 
 .pswp__button--arrow--left {
@@ -352,22 +353,22 @@
   right: 0;
 }
 
-.pswp__button--arrow--left:before,
-.pswp__button--arrow--right:before {
-  content: "";
-  top: 35px;
-  background-color: rgba(0, 0, 0, 0.3);
-  height: 30px;
-  width: 32px;
+.pswp__button--arrow--left::before,
+.pswp__button--arrow--right::before {
   position: absolute;
+  top: 35px;
+  width: 32px;
+  height: 30px;
+  content: "";
+  background-color: rgba(0, 0, 0, .3);
 }
 
-.pswp__button--arrow--left:before {
+.pswp__button--arrow--left::before {
   left: 6px;
   background-position: -138px -44px;
 }
 
-.pswp__button--arrow--right:before {
+.pswp__button--arrow--right::before {
   right: 6px;
   background-position: -94px -44px;
 }
@@ -385,17 +386,17 @@
 }
 
 .pswp__share-modal {
-  display: block;
-  background: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
+  position: absolute;
   top: 0;
   left: 0;
-  padding: 10px;
-  position: absolute;
   z-index: $pswp__root-z-index + 100;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background: rgba(0, 0, 0, .5);
   opacity: 0;
-  transition: opacity 0.25s ease-out;
+  transition: opacity .25s ease-out;
   will-change: opacity;
 }
 
@@ -404,28 +405,28 @@
 }
 
 .pswp__share-tooltip {
-  z-index: $pswp__root-z-index + 120;
   position: absolute;
-  background: #FFF;
   top: 56px;
-  border-radius: 2px;
+  right: 44px;
+  z-index: $pswp__root-z-index + 120;
   display: block;
   width: auto;
-  right: 44px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+  transition: transform .25s;
   transform: translateY(6px);
-  transition: transform 0.25s;
   will-change: transform;
   a {
     display: block;
     padding: 8px 12px;
-    color: #000;
-    text-decoration: none;
     font-size: 14px;
     line-height: 18px;
+    color: #000;
+    text-decoration: none;
     &:hover {
-      text-decoration: none;
       color: #000;
+      text-decoration: none;
     }
     &:first-child {
       /* round corners on the first/last list item */
@@ -451,47 +452,45 @@
   padding: 16px 12px;
 }
 
-a.pswp__share--facebook {
-  &:before {
-    content: "";
-    display: block;
-    width: 0;
-    height: 0;
+.pswp__share--facebook {
+  &::before {
     position: absolute;
     top: -12px;
     right: 15px;
-    border: 6px solid rgba(0, 0, 0, 0);
-    border-bottom-color: #FFF;
-    -webkit-pointer-events: none;
-    -moz-pointer-events: none;
+    display: block;
+    width: 0;
+    height: 0;
     pointer-events: none;
+    content: "";
+    border: 6px solid rgba(0, 0, 0, 0);
+    border-bottom-color: #fff;
   }
   &:hover {
-    background: #3E5C9A;
-    color: #FFF;
-    &:before {
-      border-bottom-color: #3E5C9A;
+    color: #fff;
+    background: #3e5c9a;
+    &::before {
+      border-bottom-color: #3e5c9a;
     }
   }
 }
 
-a.pswp__share--twitter {
+.pswp__share--twitter {
   &:hover {
-    background: #55ACEE;
-    color: #FFF;
+    color: #fff;
+    background: #55acee;
   }
 }
 
-a.pswp__share--pinterest {
+.pswp__share--pinterest {
   &:hover {
-    background: #CCC;
-    color: #CE272D;
+    color: #ce272d;
+    background: #ccc;
   }
 }
 
-a.pswp__share--download {
+.pswp__share--download {
   &:hover {
-    background: #DDD;
+    background: #ddd;
   }
 }
 
@@ -504,43 +503,43 @@ a.pswp__share--download {
 
 .pswp__counter {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   height: 44px;
+  padding: 0 10px;
   font-size: 13px;
   line-height: 44px;
-  color: #FFF;
-  opacity: 0.75;
-  padding: 0 10px;
+  color: #fff;
+  opacity: .75;
 }
 
 
 /*
 
-  4. Caption
+  4. caption
 
  */
 
 .pswp__caption {
   position: absolute;
-  left: 0;
   bottom: 0;
+  left: 0;
   width: 100%;
   min-height: 44px;
   small {
     font-size: 11px;
-    color: #BBB;
+    color: #bbb;
   }
 }
 
 .pswp__caption__center {
-  text-align: center;
   max-width: 500px;
+  padding: 10px;
   margin: 0 auto;
   font-size: 13px;
-  padding: 10px;
   line-height: 20px;
-  color: #CCC;
+  color: #ccc;
+  text-align: center;
 }
 
 .pswp__caption--empty {
@@ -559,21 +558,21 @@ a.pswp__share--download {
 
   5. Loading indicator (preloader)
 
-  You can play with it here - http://codepen.io/dimsemenov/pen/yyBWoR
+  You can play with it here - http://codepen.io/dimsemenov/pen/yybWoR
 
  */
 
 .pswp__preloader {
-  width: 44px;
-  height: 44px;
   position: absolute;
   top: 0;
   left: 50%;
+  width: 44px;
+  height: 44px;
   margin-left: -22px;
-  opacity: 0;
-  transition: opacity 0.25s ease-out;
-  will-change: opacity;
   direction: ltr;
+  opacity: 0;
+  transition: opacity .25s ease-out;
+  will-change: opacity;
 }
 
 .pswp__preloader__icn {
@@ -585,7 +584,7 @@ a.pswp__share--download {
 .pswp__preloader--active {
   opacity: 1;
   .pswp__preloader__icn {
-    /* We use .gif in browsers that don't support CSS animation */
+    /* We use .gif in browsers that don't support cSS animation */
     background: $pswp__preloader__icn-background 0 0 no-repeat;
   }
 }
@@ -601,14 +600,14 @@ a.pswp__share--download {
     }
   }
   .pswp__preloader__icn {
-    background: none;
-    opacity: 0.75;
+    position: absolute;
+    top: 15px;
+    left: 15px;
     width: 14px;
     height: 14px;
-    position: absolute;
-    left: 15px;
-    top: 15px;
     margin: 0;
+    background: none;
+    opacity: .75;
   }
   .pswp__preloader__cut {
     /*
@@ -621,56 +620,56 @@ a.pswp__share--download {
     overflow: hidden;
   }
   .pswp__preloader__donut {
-    box-sizing: border-box;
-    width: 14px;
-    height: 14px;
-    border: 2px solid #FFF;
-    border-radius: 50%;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
     position: absolute;
     top: 0;
     left: 0;
-    background: none;
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
     margin: 0;
+    background: none;
+    border: 2px solid #fff;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-radius: 50%;
   }
 }
 
 @media screen and (max-width: 1024px) {
   .pswp__preloader {
     position: relative;
-    left: auto;
     top: auto;
-    margin: 0;
+    left: auto;
     float: right;
+    margin: 0;
   }
 }
 
 @keyframes clockwise {
   0% {
-    transform: rotate(0deg)
+    transform: rotate(0deg);
   }
   100% {
-    transform: rotate(360deg)
+    transform: rotate(360deg);
   }
 }
 
 @keyframes donut-rotate {
   0% {
-    transform: rotate(0)
+    transform: rotate(0);
   }
   50% {
-    transform: rotate(-140deg)
+    transform: rotate(-140deg);
   }
   100% {
-    transform: rotate(0)
+    transform: rotate(0);
   }
 }
 
 
 /*
 
-  6. Additional styles
+  6. additional styles
 
  */
 
@@ -678,10 +677,10 @@ a.pswp__share--download {
 /* root element of UI */
 
 .pswp__ui {
-  -webkit-font-smoothing: auto;
+  z-index: $pswp__root-z-index + 50;
   visibility: visible;
   opacity: 1;
-  z-index: $pswp__root-z-index + 50;
+  -webkit-font-smoothing: auto;
 }
 
 
@@ -689,10 +688,10 @@ a.pswp__share--download {
 
 .pswp__top-bar {
   position: absolute;
-  left: 0;
   top: 0;
-  height: 44px;
+  left: 0;
   width: 100%;
+  height: 44px;
 }
 
 .pswp__caption,
@@ -715,7 +714,7 @@ a.pswp__share--download {
 
 .pswp__top-bar,
 .pswp__caption {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, .5);
 }
 
 
@@ -724,7 +723,7 @@ a.pswp__share--download {
 .pswp__ui--fit {
   .pswp__top-bar,
   .pswp__caption {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, .3);
   }
 }
 
@@ -753,7 +752,7 @@ a.pswp__share--download {
   .pswp__button--arrow--left,
   .pswp__button--arrow--right {
     /* Force paint & create composition layer for controls. */
-    opacity: 0.001;
+    opacity: .001;
   }
 }
 
@@ -769,7 +768,7 @@ a.pswp__share--download {
 }
 
 .pswp__element--disabled {
-  display: none !important;
+  display: none;
 }
 
 @if $pswp__include-minimal-style==true {
@@ -782,15 +781,15 @@ a.pswp__share--download {
 
 .mdb-lightbox {
   figure {
-    margin: 0;
     float: left;
+    margin: 0;
     .img-fluid {
-      display: inline
+      display: inline;
     }
     img {
       cursor: zoom-in;
-      transition: $mdb-lightbox-figure-img-transition;
       border-radius: 0;
+      transition: $mdb-lightbox-figure-img-transition;
       &:hover {
         opacity: $mdb-lightbox-figure-img-hover-opacity;
       }

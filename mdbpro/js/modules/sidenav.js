@@ -394,14 +394,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           e.preventDefault();
 
           if (_this3.menuOut === true) {
-            _this3.menuOut = false;
-
             _this3.removeMenu();
           } else {
-            if (_this3.options.showOverlay === true) {
-              _this3.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
+            _this3.menuOut = true;
 
-              _this3.$body.append(_this3.$sidenavOverlay);
+            if (_this3.options.showOverlay === true) {
+              if (!$('#sidenav-overlay').length) {
+                _this3.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
+
+                _this3.$body.append(_this3.$sidenavOverlay);
+              }
             } else {
               _this3.showCloseButton();
             }
@@ -414,13 +416,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               translateX = [0, _this3.options.MENU_WIDTH];
             }
 
-            _this3.$menu.velocity({
-              translateX: translateX
-            }, {
-              duration: _this3.options.timeDurationOpen,
-              queue: false,
-              easing: _this3.options.easingOpen
-            });
+            if (_this3.$menu.css('transform') !== 'matrix(1, 0, 0, 1, 0, 0)') {
+              _this3.$menu.velocity({
+                translateX: translateX
+              }, {
+                duration: _this3.options.timeDurationOpen,
+                queue: false,
+                easing: _this3.options.easingOpen
+              });
+            }
 
             _this3.$sidenavOverlay.on('click', function () {
               return _this3.removeMenu();
@@ -433,6 +437,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               _this3.$menu.find('.custom-scrollbar').css('padding-bottom', '30px');
             });
+
+            _this3.menuOut = true;
           }
         });
       }
@@ -445,6 +451,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.$menu.on('click', 'a:not(.collapsible-header)', function () {
             return _this4.removeMenu();
           });
+
+          if (this.$menu.css('transform') === 'translateX(0)') {
+            this.click(function () {
+              return _this4.removeMenu();
+            });
+          }
         }
       }
     }, {
@@ -550,6 +562,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         this.hideSidenavOverlay();
+        this.menuOut = false;
       }
     }]);
 
@@ -563,14 +576,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   };
 })(jQuery);
 
-$(function () {
-  $("#toggle").click(function () {
-    if ($("#slide-out").hasClass('slim')) {
-      $("#slide-out").removeClass('slim');
-      $(".sv-slim-icon").removeClass('fa-angle-double-right').addClass('fa-angle-double-left');
+$(function ($) {
+  $('#toggle').click(function () {
+    if ($('#slide-out').hasClass('slim')) {
+      $('#slide-out').removeClass('slim');
+      $('.sv-slim-icon').removeClass('fa-angle-double-right').addClass('fa-angle-double-left'); // $('.fixed-sn .double-nav').css('transition', 'all .3s ease-in-out');
+      // $('.fixed-sn .double-nav').css('padding-left', '15.9rem');
+
+      $('.fixed-sn .double-nav').css({
+        'transition': 'all .3s ease-in-out',
+        'padding-left': '15.9rem'
+      });
+      $('.fixed-sn main').css({
+        'transition': 'all .3s ease-in-out',
+        'padding-left': '15rem'
+      });
+      $('.fixed-sn footer').css({
+        'transition': 'all .3s ease-in-out',
+        'padding-left': '15rem'
+      }); // $('.fixed-sn main').css('transition', 'all .3s ease-in-out');
+      // $('.fixed-sn main').css('padding-left', '15rem');
+      // $('.fixed-sn footer').css('transition', 'all .3s ease-in-out');
+      // $('.fixed-sn footer').css('padding-left', '15rem');
     } else {
-      $("#slide-out").addClass('slim');
-      $(".sv-slim-icon").removeClass('fa-angle-double-left').addClass('fa-angle-double-right');
+      $('#slide-out').addClass('slim');
+      $('.sv-slim-icon').removeClass('fa-angle-double-left').addClass('fa-angle-double-right');
+      $('.fixed-sn .double-nav').css('padding-left', '4.6rem');
+      $('.fixed-sn main').css('padding-left', '3.7rem');
+      $('.fixed-sn footer').css('padding-left', '3.7rem');
     }
   });
 });

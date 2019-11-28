@@ -1,12 +1,14 @@
 // Cards extended
 .card {
   &.promoting-card {
-    .fas, .fab, .far {
+    .fas,
+    .fab,
+    .far {
       transition: .4s;
       &[class*="fa-"] {
         &:hover {
-          transition: .4s;
           cursor: pointer;
+          transition: .4s;
         }
       }
     }

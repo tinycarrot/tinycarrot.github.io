@@ -1,6 +1,6 @@
 /* !
  * Material Design for Bootstrap 4
- * Version: MDB Lite 4.8.2
+ * Version: MDB Lite 4.8.10
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -439,215 +439,125 @@ document.addEventListener("DOMContentLoaded", function () {
   bsCustomFileInput.init()
 });
 
-'use strict';
+"use strict";
 
 var WOW;
 
 (function ($) {
-
   WOW = function WOW() {
-
     return {
-
       init: function init() {
-
         var animationName = [];
-
+        var $selector = $('.wow');
+        var defaultOffset = 100;
         var once = 1;
 
         function mdbWow() {
-
           var windowHeight = window.innerHeight;
           var scroll = window.scrollY;
+          $selector.each(function () {
+            var $this = $(this);
+            var index = $this.index('.wow');
+            var iteration = $this.data('wow-iteration');
+            var duration = $this.data('wow-duration');
+            var delay = $this.data('wow-delay');
+            var removeTime = $this.css('animation-duration').slice(0, -1) * 1000;
 
-          $('.wow').each(function () {
-
-            if ($(this).css('visibility') == 'visible') {
+            if ($this.css('visibility') === 'visible') {
               return;
             }
 
-            if (windowHeight + scroll - 100 > getOffset(this) && scroll < getOffset(this) || windowHeight + scroll - 100 > getOffset(this) + $(this).height() && scroll < getOffset(this) + $(this).height() || windowHeight + scroll == $(document).height() && getOffset(this) + 100 > $(document).height()) {
-
-              var index = $(this).index('.wow');
-
-              var delay = $(this).attr('data-wow-delay');
-
+            if (windowHeight + scroll - defaultOffset > getOffset(this) && scroll < getOffset(this) || windowHeight + scroll - defaultOffset > getOffset(this) + $this.height() && scroll < getOffset(this) + $this.height() || windowHeight + scroll === $(document).height() && getOffset(this) + defaultOffset > $(document).height()) {
               if (delay) {
-
-                delay = $(this).attr('data-wow-delay').slice(0, -1
-
-                );
-                var self = this;
-
-                var timeout = parseFloat(delay) * 1000;
-
-                $(self).addClass('animated');
-                $(self).css({
-                  'visibility': 'visible'
-                });
-                $(self).css({
-                  'animation-delay': delay
-                });
-                $(self).css({
-                  'animation-name': animationName[index]
-                });
-
-                var removeTime = $(this).css('animation-duration').slice(0, -1) * 1000;
-
-                if ($(this).attr('data-wow-delay')) {
-
-                  removeTime += $(this).attr('data-wow-delay').slice(0, -1) * 1000;
-                }
-
-                var self = this;
-
-                setTimeout(function () {
-
-                  $(self).removeClass('animated');
-                }, removeTime);
-              } else {
-
-                $(this).addClass('animated');
-                $(this).css({
-                  'visibility': 'visible'
-                });
-                $(this).css({
-                  'animation-name': animationName[index]
-                });
-
-                var removeTime = $(this).css('animation-duration').slice(0, -1) * 1000;
-
-                var self = this;
-
-                setTimeout(function () {
-
-                  $(self).removeClass('animated');
-                }, removeTime);
+                delay = $this.data('wow-delay').slice(0, -1);
+                removeTime += $this.data('wow-delay') ? $this.data('wow-delay').slice(0, -1) * 1000 : false;
               }
+
+              if (duration) {
+                duration = $this.data('wow-duration').slice(0, -1);
+                removeTime = $this.css('animation-duration').slice(0, -1) * 1000 + $this.data('wow-duration').slice(0, -1) * 1000;
+              }
+
+              setTimeout(function () {
+                return $this.removeClass('animated');
+              }, removeTime);
+              $this.addClass('animated');
+              $this.css({
+                visibility: 'visible',
+                'animation-name': animationName[index],
+                'animation-iteration-count': iteration ? iteration : 1,
+                'animation-duration': duration ? duration : false,
+                'animation-delay': delay ? "".concat(delay, "s") : false
+              });
             }
           });
         }
 
         function appear() {
-
-          $('.wow').each(function () {
-
-            var index = $(this).index('.wow');
-
-            var delay = $(this).attr('data-wow-delay');
-
-            if (delay) {
-
-              delay = $(this).attr('data-wow-delay').slice(0, -1);
-
-              var timeout = parseFloat(delay) * 1000;
-
-              $(this).addClass('animated');
-              $(this).css({
-                'visibility': 'visible'
-              });
-              $(this).css({
-                'animation-delay': delay + 's'
-              });
-              $(this).css({
-                'animation-name': animationName[index]
-              });
-            } else {
-
-              $(this).addClass('animated');
-              $(this).css({
-                'visibility': 'visible'
-              });
-              $(this).css({
-                'animation-name': animationName[index]
-              });
-            }
+          $selector.each(function () {
+            var $this = $(this);
+            var index = $this.index('.wow');
+            var iteration = $this.data('wow-iteration');
+            var duration = $this.data('wow-duration');
+            var delay = $this.data('wow-delay');
+            delay = delay ? $this.data('wow-delay').slice(0, -1) : false;
+            $this.addClass('animated');
+            $this.css({
+              visibility: 'visible',
+              'animation-name': animationName[index],
+              'animation-iteration-count': iteration ? iteration : 1,
+              'animation-duration': duration ? duration : false,
+              'animation-delay': delay ? "".concat(delay, "s") : false
+            });
           });
         }
 
         function hide() {
-
           var windowHeight = window.innerHeight;
           var scroll = window.scrollY;
-
           $('.wow.animated').each(function () {
+            var $this = $(this);
 
-            if (windowHeight + scroll - 100 > getOffset(this) && scroll > getOffset(this) + 100 || windowHeight + scroll - 100 < getOffset(this) && scroll < getOffset(this) + 100 || getOffset(this) + $(this).height > $(document).height() - 100) {
-
-              $(this).removeClass('animated');
-              $(this).css({
-                'animation-name': 'none'
+            if (windowHeight + scroll - defaultOffset > getOffset(this) && scroll > getOffset(this) + defaultOffset || windowHeight + scroll - defaultOffset < getOffset(this) && scroll < getOffset(this) + defaultOffset || getOffset(this) + $this.height > $(document).height() - defaultOffset) {
+              $this.removeClass('animated');
+              $this.css({
+                'animation-name': 'none',
+                visibility: 'hidden'
               });
-              $(this).css({
-                'visibility': 'hidden'
-              });
-            } else {
-
-              var removeTime = $(this).css('animation-duration').slice(0, -1) * 1000;
-
-              if ($(this).attr('data-wow-delay')) {
-
-                removeTime += $(this).attr('data-wow-delay').slice(0, -1) * 1000;
-              }
-
-              var self = this;
-
-              setTimeout(function () {
-
-                $(self).removeClass('animated');
-              }, removeTime);
             }
           });
-
           mdbWow();
-
           once--;
         }
 
         function getOffset(elem) {
-
           var box = elem.getBoundingClientRect();
-
           var body = document.body;
           var docEl = document.documentElement;
-
           var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-
           var clientTop = docEl.clientTop || body.clientTop || 0;
-
           var top = box.top + scrollTop - clientTop;
-
           return Math.round(top);
         }
 
-        $('.wow').each(function () {
-
-          $(this).css({
-            'visibility': 'hidden'
-          });
-          animationName[$(this).index('.wow')] = $(this).css('animation-name');
-          $(this).css({
+        $selector.each(function () {
+          var $this = $(this);
+          animationName[$this.index('.wow')] = $this.css('animation-name');
+          $this.css({
+            visibility: 'hidden',
             'animation-name': 'none'
           });
         });
-
         $(window).scroll(function () {
-
-          if (once) {
-
-            hide();
-          } else {
-
-            mdbWow();
-          }
+          return once ? hide() : mdbWow();
         });
-
         appear();
       }
     };
   };
-})(jQuery);
 
+  return WOW;
+})(jQuery);
 "use strict";
 
 (function ($) {
@@ -673,600 +583,607 @@ var WOW;
  * https://github.com/fians/Waves/blob/master/LICENSE
  */
 
-;(function(window, factory) {
-    'use strict';
 
-    // AMD. Register as an anonymous module.  Wrap in function so we have access
-    // to root via `this`.
-    if (typeof define === 'function' && define.amd) {
-        define([], function() {
-            window.Waves = factory.call(window);
-            return window.Waves;
-        });
+(function (window, factory) {
+  'use strict';
+
+  // AMD. Register as an anonymous module.  Wrap in function so we have access
+  // to root via `this`.
+  if (typeof define === 'function' && define.amd) {
+    define([], function () {
+      window.Waves = factory.call(window);
+      return window.Waves;
+    });
+  }
+
+  // Node. Does not work with strict CommonJS, but only CommonJS-like
+  // environments that support module.exports, like Node.
+  else if (typeof exports === 'object') {
+    module.exports = factory.call(window);
+  }
+
+  // Browser globals.
+  else {
+    window.Waves = factory.call(window);
+  }
+})(typeof window === 'object' ? window : this, function () {
+  'use strict';
+
+  var Waves = Waves || {};
+  var $$ = document.querySelectorAll.bind(document);
+  var toString = Object.prototype.toString;
+  var isTouchAvailable = 'ontouchstart' in window;
+
+
+  // Find exact position of element
+  function isWindow(obj) {
+    return obj !== null && obj === obj.window;
+  }
+
+  function getWindow(elem) {
+    return isWindow(elem) ? elem : elem.nodeType === 9 && elem.defaultView;
+  }
+
+  function isObject(value) {
+    var type = typeof value;
+    return type === 'function' || type === 'object' && !!value;
+  }
+
+  function isDOMNode(obj) {
+    return isObject(obj) && obj.nodeType > 0;
+  }
+
+  function getWavesElements(nodes) {
+    var stringRepr = toString.call(nodes);
+
+    if (stringRepr === '[object String]') {
+      return $$(nodes);
+    } else if (isObject(nodes) && /^\[object (Array|HTMLCollection|NodeList|Object)\]$/.test(stringRepr) && nodes.hasOwnProperty('length')) {
+      return nodes;
+    } else if (isDOMNode(nodes)) {
+      return [nodes];
     }
 
-    // Node. Does not work with strict CommonJS, but only CommonJS-like
-    // environments that support module.exports, like Node.
-    else if (typeof exports === 'object') {
-        module.exports = factory.call(window);
+    return [];
+  }
+
+  function offset(elem) {
+    var docElem, win,
+      box = {
+        top: 0,
+        left: 0
+      },
+      doc = elem && elem.ownerDocument;
+
+    docElem = doc.documentElement;
+
+    if (typeof elem.getBoundingClientRect !== typeof undefined) {
+      box = elem.getBoundingClientRect();
+    }
+    win = getWindow(doc);
+    return {
+      top: box.top + win.pageYOffset - docElem.clientTop,
+      left: box.left + win.pageXOffset - docElem.clientLeft
+    };
+  }
+
+  function convertStyle(styleObj) {
+    var style = '';
+
+    for (var prop in styleObj) {
+      if (styleObj.hasOwnProperty(prop)) {
+        style += (prop + ':' + styleObj[prop] + ';');
+      }
     }
 
-    // Browser globals.
-    else {
-        window.Waves = factory.call(window);
+    return style;
+  }
+
+  var Effect = {
+
+    // Effect duration
+    duration: 750,
+
+    // Effect delay (check for scroll before showing effect)
+    delay: 200,
+
+    show: function (e, element, velocity) {
+
+      // Disable right click
+      if (e.button === 2) {
+        return false;
+      }
+
+      element = element || this;
+
+      // Create ripple
+      var ripple = document.createElement('div');
+      ripple.className = 'waves-ripple waves-rippling';
+      element.appendChild(ripple);
+
+      // Get click coordinate and element width
+      var pos = offset(element);
+      var relativeY = 0;
+      var relativeX = 0;
+      // Support for touch devices
+      if ('touches' in e && e.touches.length) {
+        relativeY = (e.touches[0].pageY - pos.top);
+        relativeX = (e.touches[0].pageX - pos.left);
+      }
+      //Normal case
+      else {
+        relativeY = (e.pageY - pos.top);
+        relativeX = (e.pageX - pos.left);
+      }
+      // Support for synthetic events
+      relativeX = relativeX >= 0 ? relativeX : 0;
+      relativeY = relativeY >= 0 ? relativeY : 0;
+
+      var scale = 'scale(' + ((element.clientWidth / 100) * 3) + ')';
+      var translate = 'translate(0,0)';
+
+      if (velocity) {
+        translate = 'translate(' + (velocity.x) + 'px, ' + (velocity.y) + 'px)';
+      }
+
+      // Attach data to element
+      ripple.setAttribute('data-hold', Date.now());
+      ripple.setAttribute('data-x', relativeX);
+      ripple.setAttribute('data-y', relativeY);
+      ripple.setAttribute('data-scale', scale);
+      ripple.setAttribute('data-translate', translate);
+
+      // Set ripple position
+      var rippleStyle = {
+        top: relativeY + 'px',
+        left: relativeX + 'px'
+      };
+
+      ripple.classList.add('waves-notransition');
+      ripple.setAttribute('style', convertStyle(rippleStyle));
+      ripple.classList.remove('waves-notransition');
+
+      // Scale the ripple
+      rippleStyle['-webkit-transform'] = scale + ' ' + translate;
+      rippleStyle['-moz-transform'] = scale + ' ' + translate;
+      rippleStyle['-ms-transform'] = scale + ' ' + translate;
+      rippleStyle['-o-transform'] = scale + ' ' + translate;
+      rippleStyle.transform = scale + ' ' + translate;
+      rippleStyle.opacity = '1';
+
+      var duration = e.type === 'mousemove' ? 2500 : Effect.duration;
+      rippleStyle['-webkit-transition-duration'] = duration + 'ms';
+      rippleStyle['-moz-transition-duration'] = duration + 'ms';
+      rippleStyle['-o-transition-duration'] = duration + 'ms';
+      rippleStyle['transition-duration'] = duration + 'ms';
+
+      ripple.setAttribute('style', convertStyle(rippleStyle));
+    },
+
+    hide: function (e, element) {
+      element = element || this;
+
+      var ripples = element.getElementsByClassName('waves-rippling');
+
+      for (var i = 0, len = ripples.length; i < len; i++) {
+        removeRipple(e, element, ripples[i]);
+      }
+
+      if (isTouchAvailable) {
+        element.removeEventListener('touchend', Effect.hide);
+        element.removeEventListener('touchcancel', Effect.hide);
+      }
+
+      element.removeEventListener('mouseup', Effect.hide);
+      element.removeEventListener('mouseleave', Effect.hide);
     }
-})(typeof global === 'object' ? global : this, function() {
-    'use strict';
+  };
 
-    var Waves            = Waves || {};
-    var $$               = document.querySelectorAll.bind(document);
-    var toString         = Object.prototype.toString;
-    var isTouchAvailable = 'ontouchstart' in window;
+  /**
+   * Collection of wrapper for HTML element that only have single tag
+   * like <input> and <img>
+   */
+  var TagWrapper = {
 
+    // Wrap <input> tag so it can perform the effect
+    input: function (element) {
 
-    // Find exact position of element
-    function isWindow(obj) {
-        return obj !== null && obj === obj.window;
+      var parent = element.parentNode;
+
+      // If input already have parent just pass through
+      if (parent.tagName.toLowerCase() === 'span' && parent.classList.contains('waves-effect')) {
+        return;
+      }
+
+      // Put element class and style to the specified parent
+      var wrapper = document.createElement('span');
+      wrapper.className = 'waves-input-wrapper';
+      // element.className = 'waves-button-input';
+
+      // Put element as child
+      parent.replaceChild(wrapper, element);
+      wrapper.appendChild(element);
+
+    },
+
+    // Wrap <img> tag so it can perform the effect
+    img: function (element) {
+
+      var parent = element.parentNode;
+
+      // If input already have parent just pass through
+      if (parent.tagName.toLowerCase() === 'i' && parent.classList.contains('waves-effect')) {
+        return;
+      }
+
+      // Put element as child
+      var wrapper = document.createElement('i');
+      parent.replaceChild(wrapper, element);
+      wrapper.appendChild(element);
+
+    }
+  };
+
+  /**
+   * Hide the effect and remove the ripple. Must be
+   * a separate function to pass the JSLint...
+   */
+  function removeRipple(e, el, ripple) {
+
+    // Check if the ripple still exist
+    if (!ripple) {
+      return;
     }
 
-    function getWindow(elem) {
-        return isWindow(elem) ? elem : elem.nodeType === 9 && elem.defaultView;
+    ripple.classList.remove('waves-rippling');
+
+    var relativeX = ripple.getAttribute('data-x');
+    var relativeY = ripple.getAttribute('data-y');
+    var scale = ripple.getAttribute('data-scale');
+    var translate = ripple.getAttribute('data-translate');
+
+    // Get delay beetween mousedown and mouse leave
+    var diff = Date.now() - Number(ripple.getAttribute('data-hold'));
+    var delay = 350 - diff;
+
+    if (delay < 0) {
+      delay = 0;
     }
 
-    function isObject(value) {
-        var type = typeof value;
-        return type === 'function' || type === 'object' && !!value;
+    if (e.type === 'mousemove') {
+      delay = 150;
     }
 
-    function isDOMNode(obj) {
-        return isObject(obj) && obj.nodeType > 0;
-    }
+    // Fade out ripple after delay
+    var duration = e.type === 'mousemove' ? 2500 : Effect.duration;
 
-    function getWavesElements(nodes) {
-        var stringRepr = toString.call(nodes);
+    setTimeout(function () {
 
-        if (stringRepr === '[object String]') {
-            return $$(nodes);
-        } else if (isObject(nodes) && /^\[object (Array|HTMLCollection|NodeList|Object)\]$/.test(stringRepr) && nodes.hasOwnProperty('length')) {
-            return nodes;
-        } else if (isDOMNode(nodes)) {
-            return [nodes];
+      var style = {
+        top: relativeY + 'px',
+        left: relativeX + 'px',
+        opacity: '0',
+
+        // Duration
+        '-webkit-transition-duration': duration + 'ms',
+        '-moz-transition-duration': duration + 'ms',
+        '-o-transition-duration': duration + 'ms',
+        'transition-duration': duration + 'ms',
+        '-webkit-transform': scale + ' ' + translate,
+        '-moz-transform': scale + ' ' + translate,
+        '-ms-transform': scale + ' ' + translate,
+        '-o-transform': scale + ' ' + translate,
+        'transform': scale + ' ' + translate
+      };
+
+      ripple.setAttribute('style', convertStyle(style));
+
+      setTimeout(function () {
+        try {
+          el.removeChild(ripple);
+        } catch (e) {
+          return false;
         }
+      }, duration);
 
-        return [];
+    }, delay);
+  }
+
+
+  /**
+   * Disable mousedown event for 500ms during and after touch
+   */
+  var TouchHandler = {
+
+    /* uses an integer rather than bool so there's no issues with
+     * needing to clear timeouts if another touch event occurred
+     * within the 500ms. Cannot mouseup between touchstart and
+     * touchend, nor in the 500ms after touchend. */
+    touches: 0,
+
+    allowEvent: function (e) {
+
+      var allow = true;
+
+      if (/^(mousedown|mousemove)$/.test(e.type) && TouchHandler.touches) {
+        allow = false;
+      }
+
+      return allow;
+    },
+    registerEvent: function (e) {
+      var eType = e.type;
+
+      if (eType === 'touchstart') {
+
+        TouchHandler.touches += 1; // push
+
+      } else if (/^(touchend|touchcancel)$/.test(eType)) {
+
+        setTimeout(function () {
+          if (TouchHandler.touches) {
+            TouchHandler.touches -= 1; // pop after 500ms
+          }
+        }, 500);
+
+      }
+    }
+  };
+
+
+  /**
+   * Delegated click handler for .waves-effect element.
+   * returns null when .waves-effect element not in "click tree"
+   */
+  function getWavesEffectElement(e) {
+
+    if (TouchHandler.allowEvent(e) === false) {
+      return null;
     }
 
-    function offset(elem) {
-        var docElem, win,
-            box = { top: 0, left: 0 },
-            doc = elem && elem.ownerDocument;
+    var element = null;
+    var target = e.target || e.srcElement;
 
-        docElem = doc.documentElement;
+    while (target.parentElement) {
+      if ((!(target instanceof SVGElement)) && target.classList.contains('waves-effect')) {
+        element = target;
+        break;
+      }
+      target = target.parentElement;
+    }
 
-        if (typeof elem.getBoundingClientRect !== typeof undefined) {
-            box = elem.getBoundingClientRect();
-        }
-        win = getWindow(doc);
-        return {
-            top: box.top + win.pageYOffset - docElem.clientTop,
-            left: box.left + win.pageXOffset - docElem.clientLeft
+    return element;
+  }
+
+  /**
+   * Bubble the click and show effect if .waves-effect elem was found
+   */
+  function showEffect(e) {
+
+    // Disable effect if element has "disabled" property on it
+    // In some cases, the event is not triggered by the current element
+    // if (e.target.getAttribute('disabled') !== null) {
+    //     return;
+    // }
+
+    var element = getWavesEffectElement(e);
+
+    if (element !== null) {
+
+      // Make it sure the element has either disabled property, disabled attribute or 'disabled' class
+      if (element.disabled || element.getAttribute('disabled') || element.classList.contains('disabled')) {
+        return;
+      }
+
+      TouchHandler.registerEvent(e);
+
+      if (e.type === 'touchstart' && Effect.delay) {
+
+        var hidden = false;
+
+        var timer = setTimeout(function () {
+          timer = null;
+          Effect.show(e, element);
+        }, Effect.delay);
+
+        var hideEffect = function (hideEvent) {
+
+          // if touch hasn't moved, and effect not yet started: start effect now
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+            Effect.show(e, element);
+          }
+          if (!hidden) {
+            hidden = true;
+            Effect.hide(hideEvent, element);
+          }
+
+          removeListeners();
         };
-    }
 
-    function convertStyle(styleObj) {
-        var style = '';
-
-        for (var prop in styleObj) {
-            if (styleObj.hasOwnProperty(prop)) {
-                style += (prop + ':' + styleObj[prop] + ';');
-            }
-        }
-
-        return style;
-    }
-
-    var Effect = {
-
-        // Effect duration
-        duration: 750,
-
-        // Effect delay (check for scroll before showing effect)
-        delay: 200,
-
-        show: function(e, element, velocity) {
-
-            // Disable right click
-            if (e.button === 2) {
-                return false;
-            }
-
-            element = element || this;
-
-            // Create ripple
-            var ripple = document.createElement('div');
-            ripple.className = 'waves-ripple waves-rippling';
-            element.appendChild(ripple);
-
-            // Get click coordinate and element width
-            var pos       = offset(element);
-            var relativeY = 0;
-            var relativeX = 0;
-            // Support for touch devices
-            if('touches' in e && e.touches.length) {
-                relativeY   = (e.touches[0].pageY - pos.top);
-                relativeX   = (e.touches[0].pageX - pos.left);
-            }
-            //Normal case
-            else {
-                relativeY   = (e.pageY - pos.top);
-                relativeX   = (e.pageX - pos.left);
-            }
-            // Support for synthetic events
-            relativeX = relativeX >= 0 ? relativeX : 0;
-            relativeY = relativeY >= 0 ? relativeY : 0;
-
-            var scale     = 'scale(' + ((element.clientWidth / 100) * 3) + ')';
-            var translate = 'translate(0,0)';
-
-            if (velocity) {
-                translate = 'translate(' + (velocity.x) + 'px, ' + (velocity.y) + 'px)';
-            }
-
-            // Attach data to element
-            ripple.setAttribute('data-hold', Date.now());
-            ripple.setAttribute('data-x', relativeX);
-            ripple.setAttribute('data-y', relativeY);
-            ripple.setAttribute('data-scale', scale);
-            ripple.setAttribute('data-translate', translate);
-
-            // Set ripple position
-            var rippleStyle = {
-                top: relativeY + 'px',
-                left: relativeX + 'px'
-            };
-
-            ripple.classList.add('waves-notransition');
-            ripple.setAttribute('style', convertStyle(rippleStyle));
-            ripple.classList.remove('waves-notransition');
-
-            // Scale the ripple
-            rippleStyle['-webkit-transform'] = scale + ' ' + translate;
-            rippleStyle['-moz-transform'] = scale + ' ' + translate;
-            rippleStyle['-ms-transform'] = scale + ' ' + translate;
-            rippleStyle['-o-transform'] = scale + ' ' + translate;
-            rippleStyle.transform = scale + ' ' + translate;
-            rippleStyle.opacity = '1';
-
-            var duration = e.type === 'mousemove' ? 2500 : Effect.duration;
-            rippleStyle['-webkit-transition-duration'] = duration + 'ms';
-            rippleStyle['-moz-transition-duration']    = duration + 'ms';
-            rippleStyle['-o-transition-duration']      = duration + 'ms';
-            rippleStyle['transition-duration']         = duration + 'ms';
-
-            ripple.setAttribute('style', convertStyle(rippleStyle));
-        },
-
-        hide: function(e, element) {
-            element = element || this;
-
-            var ripples = element.getElementsByClassName('waves-rippling');
-
-            for (var i = 0, len = ripples.length; i < len; i++) {
-                removeRipple(e, element, ripples[i]);
-            }
-
-            if (isTouchAvailable) {
-                element.removeEventListener('touchend', Effect.hide);
-                element.removeEventListener('touchcancel', Effect.hide);
-            }
-
-            element.removeEventListener('mouseup', Effect.hide);
-            element.removeEventListener('mouseleave', Effect.hide);
-        }
-    };
-
-    /**
-     * Collection of wrapper for HTML element that only have single tag
-     * like <input> and <img>
-     */
-    var TagWrapper = {
-
-        // Wrap <input> tag so it can perform the effect
-        input: function(element) {
-
-            var parent = element.parentNode;
-
-            // If input already have parent just pass through
-            if (parent.tagName.toLowerCase() === 'span' && parent.classList.contains('waves-effect')) {
-                return;
-            }
-
-            // Put element class and style to the specified parent
-            var wrapper       = document.createElement('span');
-            wrapper.className = 'waves-input-wrapper';
-            // element.className = 'waves-button-input';
-
-            // Put element as child
-            parent.replaceChild(wrapper, element);
-            wrapper.appendChild(element);
-
-        },
-
-        // Wrap <img> tag so it can perform the effect
-        img: function(element) {
-
-            var parent = element.parentNode;
-
-            // If input already have parent just pass through
-            if (parent.tagName.toLowerCase() === 'i' && parent.classList.contains('waves-effect')) {
-                return;
-            }
-
-            // Put element as child
-            var wrapper  = document.createElement('i');
-            parent.replaceChild(wrapper, element);
-            wrapper.appendChild(element);
-
-        }
-    };
-
-    /**
-     * Hide the effect and remove the ripple. Must be
-     * a separate function to pass the JSLint...
-     */
-    function removeRipple(e, el, ripple) {
-
-        // Check if the ripple still exist
-        if (!ripple) {
-            return;
-        }
-
-        ripple.classList.remove('waves-rippling');
-
-        var relativeX = ripple.getAttribute('data-x');
-        var relativeY = ripple.getAttribute('data-y');
-        var scale     = ripple.getAttribute('data-scale');
-        var translate = ripple.getAttribute('data-translate');
-
-        // Get delay beetween mousedown and mouse leave
-        var diff = Date.now() - Number(ripple.getAttribute('data-hold'));
-        var delay = 350 - diff;
-
-        if (delay < 0) {
-            delay = 0;
-        }
-
-        if (e.type === 'mousemove') {
-            delay = 150;
-        }
-
-        // Fade out ripple after delay
-        var duration = e.type === 'mousemove' ? 2500 : Effect.duration;
-
-        setTimeout(function() {
-
-            var style = {
-                top: relativeY + 'px',
-                left: relativeX + 'px',
-                opacity: '0',
-
-                // Duration
-                '-webkit-transition-duration': duration + 'ms',
-                '-moz-transition-duration': duration + 'ms',
-                '-o-transition-duration': duration + 'ms',
-                'transition-duration': duration + 'ms',
-                '-webkit-transform': scale + ' ' + translate,
-                '-moz-transform': scale + ' ' + translate,
-                '-ms-transform': scale + ' ' + translate,
-                '-o-transform': scale + ' ' + translate,
-                'transform': scale + ' ' + translate
-            };
-
-            ripple.setAttribute('style', convertStyle(style));
-
-            setTimeout(function() {
-                try {
-                    el.removeChild(ripple);
-                } catch (e) {
-                    return false;
-                }
-            }, duration);
-
-        }, delay);
-    }
-
-
-    /**
-     * Disable mousedown event for 500ms during and after touch
-     */
-    var TouchHandler = {
-
-        /* uses an integer rather than bool so there's no issues with
-         * needing to clear timeouts if another touch event occurred
-         * within the 500ms. Cannot mouseup between touchstart and
-         * touchend, nor in the 500ms after touchend. */
-        touches: 0,
-
-        allowEvent: function(e) {
-
-            var allow = true;
-
-            if (/^(mousedown|mousemove)$/.test(e.type) && TouchHandler.touches) {
-                allow = false;
-            }
-
-            return allow;
-        },
-        registerEvent: function(e) {
-            var eType = e.type;
-
-            if (eType === 'touchstart') {
-
-                TouchHandler.touches += 1; // push
-
-            } else if (/^(touchend|touchcancel)$/.test(eType)) {
-
-                setTimeout(function() {
-                    if (TouchHandler.touches) {
-                        TouchHandler.touches -= 1; // pop after 500ms
-                    }
-                }, 500);
-
-            }
-        }
-    };
-
-
-    /**
-     * Delegated click handler for .waves-effect element.
-     * returns null when .waves-effect element not in "click tree"
-     */
-    function getWavesEffectElement(e) {
-
-        if (TouchHandler.allowEvent(e) === false) {
-            return null;
-        }
-
-        var element = null;
-        var target = e.target || e.srcElement;
-
-        while (target.parentElement) {
-            if ( (!(target instanceof SVGElement)) && target.classList.contains('waves-effect')) {
-                element = target;
-                break;
-            }
-            target = target.parentElement;
-        }
-
-        return element;
-    }
-
-    /**
-     * Bubble the click and show effect if .waves-effect elem was found
-     */
-    function showEffect(e) {
-
-        // Disable effect if element has "disabled" property on it
-        // In some cases, the event is not triggered by the current element
-        // if (e.target.getAttribute('disabled') !== null) {
-        //     return;
-        // }
-
-        var element = getWavesEffectElement(e);
-
-        if (element !== null) {
-
-            // Make it sure the element has either disabled property, disabled attribute or 'disabled' class
-            if (element.disabled || element.getAttribute('disabled') || element.classList.contains('disabled')) {
-                return;
-            }
-
-            TouchHandler.registerEvent(e);
-
-            if (e.type === 'touchstart' && Effect.delay) {
-
-                var hidden = false;
-
-                var timer = setTimeout(function () {
-                    timer = null;
-                    Effect.show(e, element);
-                }, Effect.delay);
-
-                var hideEffect = function(hideEvent) {
-
-                    // if touch hasn't moved, and effect not yet started: start effect now
-                    if (timer) {
-                        clearTimeout(timer);
-                        timer = null;
-                        Effect.show(e, element);
-                    }
-                    if (!hidden) {
-                        hidden = true;
-                        Effect.hide(hideEvent, element);
-                    }
-
-                    removeListeners();
-                };
-
-                var touchMove = function(moveEvent) {
-                    if (timer) {
-                        clearTimeout(timer);
-                        timer = null;
-                    }
-                    hideEffect(moveEvent);
-
-                    removeListeners();
-                };
-
-                element.addEventListener('touchmove', touchMove, false);
-                element.addEventListener('touchend', hideEffect, false);
-                element.addEventListener('touchcancel', hideEffect, false);
-
-                var removeListeners = function() {
-                    element.removeEventListener('touchmove', touchMove);
-                    element.removeEventListener('touchend', hideEffect);
-                    element.removeEventListener('touchcancel', hideEffect);
-                };
-            } else {
-
-                Effect.show(e, element);
-
-                if (isTouchAvailable) {
-                    element.addEventListener('touchend', Effect.hide, false);
-                    element.addEventListener('touchcancel', Effect.hide, false);
-                }
-
-                element.addEventListener('mouseup', Effect.hide, false);
-                element.addEventListener('mouseleave', Effect.hide, false);
-            }
-        }
-    }
-
-    Waves.init = function(options) {
-        var body = document.body;
-
-        options = options || {};
-
-        if ('duration' in options) {
-            Effect.duration = options.duration;
-        }
-
-        if ('delay' in options) {
-            Effect.delay = options.delay;
-        }
+        var touchMove = function (moveEvent) {
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+          hideEffect(moveEvent);
+
+          removeListeners();
+        };
+
+        element.addEventListener('touchmove', touchMove, false);
+        element.addEventListener('touchend', hideEffect, false);
+        element.addEventListener('touchcancel', hideEffect, false);
+
+        var removeListeners = function () {
+          element.removeEventListener('touchmove', touchMove);
+          element.removeEventListener('touchend', hideEffect);
+          element.removeEventListener('touchcancel', hideEffect);
+        };
+      } else {
+
+        Effect.show(e, element);
 
         if (isTouchAvailable) {
-            body.addEventListener('touchstart', showEffect, false);
-            body.addEventListener('touchcancel', TouchHandler.registerEvent, false);
-            body.addEventListener('touchend', TouchHandler.registerEvent, false);
+          element.addEventListener('touchend', Effect.hide, false);
+          element.addEventListener('touchcancel', Effect.hide, false);
         }
 
-        body.addEventListener('mousedown', showEffect, false);
-    };
+        element.addEventListener('mouseup', Effect.hide, false);
+        element.addEventListener('mouseleave', Effect.hide, false);
+      }
+    }
+  }
+
+  Waves.init = function (options) {
+    var body = document.body;
+
+    options = options || {};
+
+    if ('duration' in options) {
+      Effect.duration = options.duration;
+    }
+
+    if ('delay' in options) {
+      Effect.delay = options.delay;
+    }
+
+    if (isTouchAvailable) {
+      body.addEventListener('touchstart', showEffect, false);
+      body.addEventListener('touchcancel', TouchHandler.registerEvent, false);
+      body.addEventListener('touchend', TouchHandler.registerEvent, false);
+    }
+
+    body.addEventListener('mousedown', showEffect, false);
+  };
 
 
-    /**
-     * Attach Waves to dynamically loaded inputs, or add .waves-effect and other
-     * waves classes to a set of elements. Set drag to true if the ripple mouseover
-     * or skimming effect should be applied to the elements.
-     */
-    Waves.attach = function(elements, classes) {
+  /**
+   * Attach Waves to dynamically loaded inputs, or add .waves-effect and other
+   * waves classes to a set of elements. Set drag to true if the ripple mouseover
+   * or skimming effect should be applied to the elements.
+   */
+  Waves.attach = function (elements, classes) {
 
-        elements = getWavesElements(elements);
+    elements = getWavesElements(elements);
 
-        if (toString.call(classes) === '[object Array]') {
-            classes = classes.join(' ');
-        }
+    if (toString.call(classes) === '[object Array]') {
+      classes = classes.join(' ');
+    }
 
-        classes = classes ? ' ' + classes : '';
+    classes = classes ? ' ' + classes : '';
 
-        var element, tagName;
+    var element, tagName;
 
-        for (var i = 0, len = elements.length; i < len; i++) {
+    for (var i = 0, len = elements.length; i < len; i++) {
 
-            element = elements[i];
-            tagName = element.tagName.toLowerCase();
+      element = elements[i];
+      tagName = element.tagName.toLowerCase();
 
-            if (['input', 'img'].indexOf(tagName) !== -1) {
-                TagWrapper[tagName](element);
-                element = element.parentElement;
-            }
+      if (['input', 'img'].indexOf(tagName) !== -1) {
+        TagWrapper[tagName](element);
+        element = element.parentElement;
+      }
 
-            if (element.className.indexOf('waves-effect') === -1) {
-                element.className += ' waves-effect' + classes;
-            }
-        }
-    };
-
-
-    /**
-     * Cause a ripple to appear in an element via code.
-     */
-    Waves.ripple = function(elements, options) {
-        elements = getWavesElements(elements);
-        var elementsLen = elements.length;
-
-        options          = options || {};
-        options.wait     = options.wait || 0;
-        options.position = options.position || null; // default = centre of element
+      if (element.className.indexOf('waves-effect') === -1) {
+        element.className += ' waves-effect' + classes;
+      }
+    }
+  };
 
 
-        if (elementsLen) {
-            var element, pos, off, centre = {}, i = 0;
-            var mousedown = {
-                type: 'mousedown',
-                button: 1
-            };
-            var hideRipple = function(mouseup, element) {
-                return function() {
-                    Effect.hide(mouseup, element);
-                };
-            };
+  /**
+   * Cause a ripple to appear in an element via code.
+   */
+  Waves.ripple = function (elements, options) {
+    elements = getWavesElements(elements);
+    var elementsLen = elements.length;
 
-            for (; i < elementsLen; i++) {
-                element = elements[i];
-                pos = options.position || {
-                    x: element.clientWidth / 2,
-                    y: element.clientHeight / 2
-                };
+    options = options || {};
+    options.wait = options.wait || 0;
+    options.position = options.position || null; // default = centre of element
 
-                off      = offset(element);
-                centre.x = off.left + pos.x;
-                centre.y = off.top + pos.y;
 
-                mousedown.pageX = centre.x;
-                mousedown.pageY = centre.y;
+    if (elementsLen) {
+      var element, pos, off, centre = {},
+        i = 0;
+      var mousedown = {
+        type: 'mousedown',
+        button: 1
+      };
+      var hideRipple = function (mouseup, element) {
+        return function () {
+          Effect.hide(mouseup, element);
+        };
+      };
 
-                Effect.show(mousedown, element);
-
-                if (options.wait >= 0 && options.wait !== null) {
-                    var mouseup = {
-                        type: 'mouseup',
-                        button: 1
-                    };
-
-                    setTimeout(hideRipple(mouseup, element), options.wait);
-                }
-            }
-        }
-    };
-
-    /**
-     * Remove all ripples from an element.
-     */
-    Waves.calm = function(elements) {
-        elements = getWavesElements(elements);
-        var mouseup = {
-            type: 'mouseup',
-            button: 1
+      for (; i < elementsLen; i++) {
+        element = elements[i];
+        pos = options.position || {
+          x: element.clientWidth / 2,
+          y: element.clientHeight / 2
         };
 
-        for (var i = 0, len = elements.length; i < len; i++) {
-            Effect.hide(mouseup, elements[i]);
+        off = offset(element);
+        centre.x = off.left + pos.x;
+        centre.y = off.top + pos.y;
+
+        mousedown.pageX = centre.x;
+        mousedown.pageY = centre.y;
+
+        Effect.show(mousedown, element);
+
+        if (options.wait >= 0 && options.wait !== null) {
+          var mouseup = {
+            type: 'mouseup',
+            button: 1
+          };
+
+          setTimeout(hideRipple(mouseup, element), options.wait);
         }
+      }
+    }
+  };
+
+  /**
+   * Remove all ripples from an element.
+   */
+  Waves.calm = function (elements) {
+    elements = getWavesElements(elements);
+    var mouseup = {
+      type: 'mouseup',
+      button: 1
     };
 
-    /**
-     * Deprecated API fallback
-     */
-    Waves.displayEffect = function(options) {
-        console.error('Waves.displayEffect() has been deprecated and will be removed in future version. Please use Waves.init() to initialize Waves effect');
-        Waves.init(options);
-    };
+    for (var i = 0, len = elements.length; i < len; i++) {
+      Effect.hide(mouseup, elements[i]);
+    }
+  };
 
-    return Waves;
+  /**
+   * Deprecated API fallback
+   */
+  Waves.displayEffect = function (options) {
+    console.error('Waves.displayEffect() has been deprecated and will be removed in future version. Please use Waves.init() to initialize Waves effect');
+    Waves.init(options);
+  };
+
+  return Waves;
+});
+$(document).ready(function () {
+  //Initialization
+  Waves.attach('.btn:not(.btn-flat), .btn-floating', ['waves-light']);
+  Waves.attach('.btn-flat', ['waves-effect']);
+  Waves.attach('.chip', ['waves-effect']);
+  Waves.attach('.view a .mask', ['waves-light']);
+  Waves.attach('.waves-light', ['waves-light']);
+  Waves.attach('.navbar-nav a:not(.navbar-brand), .nav-icons li a, .nav-tabs .nav-item:not(.dropdown)', ['waves-light']);
+  Waves.attach('.pager li a', ['waves-light']);
+  Waves.attach('.pagination .page-item .page-link', ['waves-effect']);
+  Waves.init();
 });
 
-//Initialization
-Waves.attach('.btn:not(.btn-flat), .btn-floating', ['waves-light']);
-Waves.attach('.btn-flat', ['waves-effect']);
-Waves.attach('.chip', ['waves-effect']);
-Waves.attach('.view a .mask', ['waves-light']);
-Waves.attach('.waves-light', ['waves-light']);
-Waves.attach('.navbar-nav a:not(.navbar-brand), .nav-icons li a, .nav-tabs .nav-item:not(.dropdown)', ['waves-light']);
-Waves.attach('.pager li a', ['waves-light']);
-Waves.attach('.pagination .page-item .page-link', ['waves-effect']);
-Waves.init();
 "use strict";
 
 var _this = void 0;
@@ -1442,13 +1359,24 @@ var _this = void 0;
 })(jQuery);
 "use strict";
 
+// 'use strict';
+var loader_path = '../dev/dist/mdb-addons/preloader.html';
+var windowLoaded = false;
+$(window).on('load', function () {
+  windowLoaded = true;
+});
 $(document).ready(function () {
   $('body').attr('aria-busy', true);
-  $('#preloader-markup').load('mdb-addons/preloader.html', function () {
-    $(window).on('load', function () {
+  $('#preloader-markup').load(loader_path, function () {
+    if (windowLoaded) {
       $('#mdb-preloader').fadeOut('slow');
       $('body').removeAttr('aria-busy');
-    });
+    } else {
+      $(window).on('load', function () {
+        $('#mdb-preloader').fadeOut('slow');
+        $('body').removeAttr('aria-busy');
+      });
+    }
   });
 });
 "use strict";
@@ -2356,6 +2284,16 @@ dropdownSelectors.on({
     }
   }
 });
+$('.multi-level-dropdown .dropdown-submenu > a').on("mouseenter", function (e) {
+  var submenu = $(this);
+  $('.multi-level-dropdown .dropdown-submenu .dropdown-menu').removeClass('show');
+  submenu.next('.dropdown-menu').addClass('show');
+  e.stopPropagation();
+});
+$('.multi-level-dropdown .dropdown').on("hidden.bs.dropdown", function () {
+  // hide any open menus when parent closes
+  $('.multi-level-dropdown .dropdown-menu.show').removeClass('show');
+});
 "use strict";
 
 (function ($) {
@@ -2826,14 +2764,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           e.preventDefault();
 
           if (_this3.menuOut === true) {
-            _this3.menuOut = false;
-
             _this3.removeMenu();
           } else {
-            if (_this3.options.showOverlay === true) {
-              _this3.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
+            _this3.menuOut = true;
 
-              _this3.$body.append(_this3.$sidenavOverlay);
+            if (_this3.options.showOverlay === true) {
+              if (!$('#sidenav-overlay').length) {
+                _this3.$sidenavOverlay = $('<div id="sidenav-overlay"></div>');
+
+                _this3.$body.append(_this3.$sidenavOverlay);
+              }
             } else {
               _this3.showCloseButton();
             }
@@ -2846,13 +2786,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               translateX = [0, _this3.options.MENU_WIDTH];
             }
 
-            _this3.$menu.velocity({
-              translateX: translateX
-            }, {
-              duration: _this3.options.timeDurationOpen,
-              queue: false,
-              easing: _this3.options.easingOpen
-            });
+            if (_this3.$menu.css('transform') !== 'matrix(1, 0, 0, 1, 0, 0)') {
+              _this3.$menu.velocity({
+                translateX: translateX
+              }, {
+                duration: _this3.options.timeDurationOpen,
+                queue: false,
+                easing: _this3.options.easingOpen
+              });
+            }
 
             _this3.$sidenavOverlay.on('click', function () {
               return _this3.removeMenu();
@@ -2865,6 +2807,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               _this3.$menu.find('.custom-scrollbar').css('padding-bottom', '30px');
             });
+
+            _this3.menuOut = true;
           }
         });
       }
@@ -2877,6 +2821,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.$menu.on('click', 'a:not(.collapsible-header)', function () {
             return _this4.removeMenu();
           });
+
+          if (this.$menu.css('transform') === 'translateX(0)') {
+            this.click(function () {
+              return _this4.removeMenu();
+            });
+          }
         }
       }
     }, {
@@ -2982,6 +2932,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         this.hideSidenavOverlay();
+        this.menuOut = false;
       }
     }]);
 
@@ -2995,14 +2946,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   };
 })(jQuery);
 
-$(function () {
-  $("#toggle").click(function () {
-    if ($("#slide-out").hasClass('slim')) {
-      $("#slide-out").removeClass('slim');
-      $(".sv-slim-icon").removeClass('fa-angle-double-right').addClass('fa-angle-double-left');
+$(function ($) {
+  $('#toggle').click(function () {
+    if ($('#slide-out').hasClass('slim')) {
+      $('#slide-out').removeClass('slim');
+      $('.sv-slim-icon').removeClass('fa-angle-double-right').addClass('fa-angle-double-left'); // $('.fixed-sn .double-nav').css('transition', 'all .3s ease-in-out');
+      // $('.fixed-sn .double-nav').css('padding-left', '15.9rem');
+
+      $('.fixed-sn .double-nav').css({
+        'transition': 'all .3s ease-in-out',
+        'padding-left': '15.9rem'
+      });
+      $('.fixed-sn main').css({
+        'transition': 'all .3s ease-in-out',
+        'padding-left': '15rem'
+      });
+      $('.fixed-sn footer').css({
+        'transition': 'all .3s ease-in-out',
+        'padding-left': '15rem'
+      }); // $('.fixed-sn main').css('transition', 'all .3s ease-in-out');
+      // $('.fixed-sn main').css('padding-left', '15rem');
+      // $('.fixed-sn footer').css('transition', 'all .3s ease-in-out');
+      // $('.fixed-sn footer').css('padding-left', '15rem');
     } else {
-      $("#slide-out").addClass('slim');
-      $(".sv-slim-icon").removeClass('fa-angle-double-left').addClass('fa-angle-double-right');
+      $('#slide-out').addClass('slim');
+      $('.sv-slim-icon').removeClass('fa-angle-double-left').addClass('fa-angle-double-right');
+      $('.fixed-sn .double-nav').css('padding-left', '4.6rem');
+      $('.fixed-sn main').css('padding-left', '3.7rem');
+      $('.fixed-sn footer').css('padding-left', '3.7rem');
     }
   });
 });
@@ -3339,18 +3310,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       this.isMultiple = Boolean(this.$nativeSelect.attr('multiple'));
       this.isSearchable = Boolean(this.$nativeSelect.attr('searchable'));
       this.isRequired = Boolean(this.$nativeSelect.attr('required'));
+      this.isEditable = Boolean(this.$nativeSelect.attr('editable'));
+      this.selectAllLabel = Boolean(this.$nativeSelect.attr('selectAllLabel')) ? this.$nativeSelect.attr('selectAllLabel') : 'Select all';
+      this.optionsSelectedLabel = Boolean(this.$nativeSelect.attr('optionsSelectedLabel')) ? this.$nativeSelect.attr('optionsSelectedLabel') : 'options selected';
+      this.keyboardActiveClass = Boolean(this.$nativeSelect.attr('keyboardActiveClass')) ? this.$nativeSelect.attr('keyboardActiveClass') : 'heavy-rain-gradient';
       this.uuid = this.options.nativeID !== null && this.options.nativeID !== '' && this.options.nativeID !== undefined && typeof this.options.nativeID === 'string' ? this.options.nativeID : this._randomUUID();
       this.$selectWrapper = $('<div class="select-wrapper"></div>');
       this.$materialOptionsList = $("<ul id=\"select-options-".concat(this.uuid, "\" class=\"dropdown-content select-dropdown w-100 ").concat(this.isMultiple ? 'multiple-select-dropdown' : '', "\"></ul>"));
-      this.$materialSelectedOption = this.$nativeSelect.find('option:selected');
-      this.$materialSelectInitialOption = this.$nativeSelect.find('option:first').text() || '';
+      this.$materialSelectInitialOption = $nativeSelect.find('option:selected').text() || $nativeSelect.find('option:first').text() || '';
       this.$nativeSelectChildren = this.$nativeSelect.children('option, optgroup');
-      this.$materialSelect = $("<input type=\"text\" class=\"".concat(this.options.BSinputText ? 'browser-default custom-select multi-bs-select select-dropdown' : 'select-dropdown', "\" readonly=\"true\" ").concat(this.$nativeSelect.is(' :disabled') ? 'disabled' : '', " data-activates=\"select-options-").concat(this.uuid, "\" value=\"\"/>"));
+      this.$materialSelect = $("<input type=\"text\" class=\"".concat(this.options.BSinputText ? 'browser-default custom-select multi-bs-select select-dropdown form-control' : 'select-dropdown form-control', "\" ").concat(!this.options.validate && 'readonly="true"', " required=\"").concat(this.options.validate ? 'true' : 'false', "\" ").concat(this.$nativeSelect.is(' :disabled') ? 'disabled' : '', " data-activates=\"select-options-").concat(this.uuid, "\" value=\"\"/>"));
       this.$dropdownIcon = this.options.BSinputText ? '' : $('<span class="caret">&#9660;</span>');
       this.$searchInput = null;
-      this.$toggleAll = $('<li class="select-toggle-all"><span><input type="checkbox" class="form-check-input"><label>Select all</label></span></li>');
-      this.label = this.$nativeSelect.next('label').not('.mdb-main-label');
+      this.$toggleAll = $("<li class=\"select-toggle-all\"><span><input type=\"checkbox\" class=\"form-check-input\"><label>".concat(this.selectAllLabel, "</label></span></li>"));
+      this.$addOptionBtn = $('<i class="select-add-option fas fa-plus"></i>');
       this.mainLabel = this.$nativeSelect.next('.mdb-main-label');
+      this.$validFeedback = $("<div class=\"valid-feedback\">".concat(this.options.validFeedback || 'Good choice', "</div>"));
+      this.$invalidFeedback = $("<div class=\"invalid-feedback\">".concat(this.options.invalidFeedback || 'Bad choice', "</div>"));
       this.valuesSelected = [];
       this.keyCodes = {
         tab: 9,
@@ -3377,7 +3353,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         if (this.options.destroy) {
+          var $btnSave = this.$nativeSelect.parent().find('button.btn-save').length ? this.$nativeSelect.parent().find('button.btn-save') : false;
           this.$nativeSelect.data('select-id', null).removeClass('initialized');
+          this.$nativeSelect.parent().append($btnSave);
           return;
         }
 
@@ -3394,18 +3372,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         this.$nativeSelect.data('select-id', this.uuid);
         var sanitizedLabelHtml = this.$materialSelectInitialOption.replace(/"/g, '&quot;').replace(/  +/g, ' ').trim();
-
-        if (this.mainLabel.length === 0) {
-          this.$materialSelect.val(sanitizedLabelHtml);
-        } else {
-          this.mainLabel.text();
-        }
-
-        if (this.$materialSelectedOption.length > 0 && this.$nativeSelect.hasClass('md-selected')) {
-          this.mainLabel.addClass('active');
-          this.$materialSelect.val(this.$materialSelectedOption.text());
-        }
-
+        this.mainLabel.length === 0 ? this.$materialSelect.val(sanitizedLabelHtml) : this.mainLabel.text();
         this.renderMaterialSelect();
         this.bindEvents();
 
@@ -3464,6 +3431,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         this.$nativeSelect.before(this.$selectWrapper);
         this.appendDropdownIcon();
+        this.appendValidation();
         this.appendMaterialSelect();
         this.appendMaterialOptionsList();
         this.appendNativeSelect();
@@ -3489,8 +3457,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _this.$materialOptionsList.find('li:not(.optgroup):not(.select-toggle-all)').eq(index).find(':checkbox').prop('checked', true);
           });
         } else {
-          var index = this.$nativeSelect.find('option:selected').index();
-          this.$materialOptionsList.find('li').eq(index).addClass('active');
+          var preselectedOption = this.$nativeSelect.find('option[selected]').first();
+          var indexOfPreselectedOption = this.$nativeSelect.find('option').index(preselectedOption.get(0));
+
+          if (preselectedOption.attr('disabled') !== 'disabled' && indexOfPreselectedOption >= 0) {
+            this._toggleSelectedValue(indexOfPreselectedOption);
+          }
         }
 
         this.$nativeSelect.addClass('initialized');
@@ -3509,6 +3481,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.$selectWrapper.append(this.$dropdownIcon);
       }
     }, {
+      key: "appendValidation",
+      value: function appendValidation() {
+        if (this.options.validate) {
+          this.$validFeedback.insertAfter(this.$selectWrapper);
+          this.$invalidFeedback.insertAfter(this.$selectWrapper);
+        }
+      }
+    }, {
       key: "appendMaterialSelect",
       value: function appendMaterialSelect() {
         this.$selectWrapper.append(this.$materialSelect);
@@ -3518,6 +3498,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       value: function appendMaterialOptionsList() {
         if (this.isSearchable) {
           this.appendSearchInputOption();
+        }
+
+        if (this.isEditable && this.isSearchable) {
+          this.appendAddOptionBtn();
         }
 
         this.buildMaterialOptions();
@@ -3539,9 +3523,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var placeholder = this.$nativeSelect.attr('searchable');
 
         if (this.options.BSsearchIn) {
-          this.$searchInput = $("<span class=\"search-wrap ml-2\"><div class=\"mt-0\"><input type=\"text\" class=\"search form-control mb-2 w-100 d-block select-default\" placeholder=\"".concat(placeholder, "\"></div></span>"));
+          this.$searchInput = $("<span class=\"search-wrap ml-2\"><div class=\"mt-0\"><input type=\"text\" class=\"search mb-2 w-100 d-block select-default\" tabindex=\"-1\" placeholder=\"".concat(placeholder, "\"></div></span>"));
         } else {
-          this.$searchInput = $("<span class=\"search-wrap ml-2\"><div class=\"md-form mt-0\"><input type=\"text\" class=\"search form-control w-100 d-block\" placeholder=\"".concat(placeholder, "\"></div></span>"));
+          this.$searchInput = $("<span class=\"search-wrap ml-2\"><div class=\"md-form mt-0\"><input type=\"text\" class=\"search w-100 d-block\" tabindex=\"-1\" placeholder=\"".concat(placeholder, "\"></div></span>"));
         }
 
         this.$materialOptionsList.append(this.$searchInput);
@@ -3550,9 +3534,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         });
       }
     }, {
+      key: "appendAddOptionBtn",
+      value: function appendAddOptionBtn() {
+        this.$searchInput.append(this.$addOptionBtn);
+        this.$addOptionBtn.on('click', this.addNewOption.bind(this));
+      }
+    }, {
+      key: "addNewOption",
+      value: function addNewOption() {
+        var val = this.$searchInput.find('input').val();
+        var $newOption = $("<option value=\"".concat(val.toLowerCase(), "\" selected>").concat(val, "</option>")).prop('selected', true);
+
+        if (!this.isMultple) {
+          this.$nativeSelectChildren.each(function (index, option) {
+            $(option).attr('selected', false);
+          });
+        }
+
+        ;
+        this.$nativeSelect.append($newOption);
+      }
+    }, {
       key: "appendToggleAllCheckbox",
       value: function appendToggleAllCheckbox() {
-        this.$materialOptionsList.find('li.disabled').first().after(this.$toggleAll);
+        var firstOption = this.$materialOptionsList.find('li').first();
+
+        if (firstOption.hasClass('disabled') && firstOption.find('input').prop('disabled')) {
+          firstOption.after(this.$toggleAll);
+        } else {
+          this.$materialOptionsList.find('li').first().before(this.$toggleAll);
+        }
       }
     }, {
       key: "appendSaveSelectButton",
@@ -3650,7 +3661,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         if (this.isSearchable) {
-          this.$searchInput.find('.search').on('keyup', this._onSearchInputKeyup);
+          this.$searchInput.find('.search').on('keyup', this._onSearchInputKeyup.bind(this));
         }
 
         $('html').on('click', this._onHTMLClick.bind(this));
@@ -3741,6 +3752,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }
     }, {
+      key: "_escapeKeyboardActiveOptions",
+      value: function _escapeKeyboardActiveOptions() {
+        var _this4 = this;
+
+        this.$materialOptionsList.find('li').each(function (i, el) {
+          $(el).removeClass(_this4.keyboardActiveClass);
+        });
+      }
+    }, {
       key: "_triggerChangeOnNativeSelect",
       value: function _triggerChangeOnNativeSelect() {
         var keyboardEvt = new KeyboardEvent('change', {
@@ -3771,7 +3791,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         if (!this.isMultiple) {
-          this.mainLabel.addClass('active ');
+          this.mainLabel.addClass('active');
         }
 
         $(document).find('input.select-dropdown').each(function (i, el) {
@@ -3783,7 +3803,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       key: "_onMaterialSelectClick",
       value: function _onMaterialSelectClick(e) {
-        this.mainLabel.addClass('active ');
+        this.mainLabel.addClass('active');
         e.stopPropagation();
       }
     }, {
@@ -3831,25 +3851,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       key: "_onToggleAllClick",
       value: function _onToggleAllClick(e) {
-        var _this4 = this;
+        var _this5 = this;
 
         var checkbox = $(this.$toggleAll).find('input[type="checkbox"]').first();
         var state = !$(checkbox).prop('checked');
         $(checkbox).prop('checked', state);
-        this.$materialOptionsList.find('li:not(.optgroup):not(.disabled):not(.select-toggle-all)').each(function (materialOptionIndex, materialOption) {
+        this.$materialOptionsList.find('li:not(.optgroup):not(.select-toggle-all)').each(function (materialOptionIndex, materialOption) {
           var $optionCheckbox = $(materialOption).find('input[type="checkbox"]');
 
-          if (state && $optionCheckbox.is(':checked') || !state && !$optionCheckbox.is(':checked')) {
+          if (state && $optionCheckbox.is(':checked') || !state && !$optionCheckbox.is(':checked') || $(materialOption).is(':hidden') || $(materialOption).is('.disabled')) {
             return;
-          }
-
-          if (_this4._isToggleAllPresent()) {
-            materialOptionIndex++;
           }
 
           $optionCheckbox.prop('checked', state);
 
-          _this4.$nativeSelect.find('option').eq(materialOptionIndex).prop('selected', state);
+          _this5.$nativeSelect.find('option').eq(materialOptionIndex).prop('selected', state);
 
           if (state) {
             $(materialOption).removeClass('active');
@@ -3857,11 +3873,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             $(materialOption).addClass('active');
           }
 
-          _this4._toggleSelectedValue(materialOptionIndex);
+          _this5._toggleSelectedValue(materialOptionIndex);
 
-          _this4._selectOption(materialOption);
+          _this5._selectOption(materialOption);
 
-          _this4._setValueToMaterialSelect();
+          _this5._setValueToMaterialSelect();
         });
         this.$nativeSelect.data('stop-refresh', true);
 
@@ -3877,6 +3893,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var isTab = e.which === this.keyCodes.tab;
         var isEsc = e.which === this.keyCodes.esc;
         var isEnter = e.which === this.keyCodes.enter;
+        var isEnterWithShift = isEnter && e.shiftKey;
         var isArrowUp = e.which === this.keyCodes.arrowUp;
         var isArrowDown = e.which === this.keyCodes.arrowDown;
         var isMaterialSelectVisible = this.$materialOptionsList.is(':visible');
@@ -3894,7 +3911,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         e.preventDefault();
 
-        if (isEnter) {
+        if (isEnterWithShift) {
+          this._handleEnterWithShiftKey($this);
+        } else if (isEnter) {
           this._handleEnterKey($this);
         } else if (isArrowDown) {
           this._handleArrowDownKey();
@@ -3912,6 +3931,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this._handleEscKey(materialSelect);
       }
     }, {
+      key: "_handleEnterWithShiftKey",
+      value: function _handleEnterWithShiftKey(materialSelect) {
+        if (!this.isMultiple) {
+          this._handleEnterKey(materialSelect);
+        } else {
+          this.$toggleAll.trigger('click');
+        }
+      }
+    }, {
       key: "_handleEnterKey",
       value: function _handleEnterKey(materialSelect) {
         var $activeOption = this.$materialOptionsList.find('li.selected:not(.disabled)');
@@ -3924,84 +3952,146 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       key: "_handleArrowDownKey",
       value: function _handleArrowDownKey() {
-        var $firstOption = this.$materialOptionsList.find('li').not('.disabled').first();
-        var $lastOption = this.$materialOptionsList.find('li').not('.disabled').last();
+        var _this6 = this;
+
+        var $availableOptions = this.$materialOptionsList.find('li:visible').not('.disabled, .select-toggle-all');
+        var $firstOption = this.$materialOptionsList.find('li:visible').not('.disabled, .select-toggle-all').first();
+        var $lastOption = this.$materialOptionsList.find('li:visible').not('.disabled, .select-toggle-all').last();
         var anySelected = this.$materialOptionsList.find('li.selected').length > 0;
-        var $currentOption = anySelected ? this.$materialOptionsList.find('li.selected') : $firstOption;
-        var $matchedMaterialOption = $currentOption.is($lastOption) || !anySelected ? $currentOption : $currentOption.next('li:not(.disabled)');
+        var $currentOption = anySelected ? this.$materialOptionsList.find('li.selected').first() : $firstOption;
+        var $nextOption = $currentOption.next('li:visible:not(.disabled, .select-toggle-all)');
+        var $activeOption = $nextOption;
+        $availableOptions.each(function (key, el) {
+          if ($(el).hasClass(_this6.keyboardActiveClass)) {
+            $nextOption = $availableOptions.eq(key + 1);
+            $activeOption = $availableOptions.eq(key);
+          }
+        });
+        var $matchedMaterialOption = $currentOption.is($lastOption) || !anySelected ? $currentOption : $nextOption;
 
         this._selectSingleOption($matchedMaterialOption);
 
+        this._escapeKeyboardActiveOptions();
+
         if (!$matchedMaterialOption.find('input').is(':checked')) {
-          $matchedMaterialOption.removeClass('active');
+          $matchedMaterialOption.removeClass(this.keyboardActiveClass);
         }
 
-        if (!$matchedMaterialOption.prev().hasClass('selected') && !$matchedMaterialOption.prev().find('input').is(':checked')) {
-          $matchedMaterialOption.prev().removeClass('active');
+        if (!$activeOption.hasClass('selected') && !$activeOption.find('input').is(':checked') && this.isMultiple) {
+          $activeOption.removeClass('active', this.keyboardActiveClass);
         }
 
-        $matchedMaterialOption.addClass('active');
+        $matchedMaterialOption.addClass(this.keyboardActiveClass);
+
+        if ($matchedMaterialOption.position()) {
+          this.$materialOptionsList.scrollTop(this.$materialOptionsList.scrollTop() + $matchedMaterialOption.position().top);
+        }
       }
     }, {
       key: "_handleArrowUpKey",
       value: function _handleArrowUpKey() {
-        var $firstOption = this.$materialOptionsList.find('li').not('.disabled').first();
-        var $lastOption = this.$materialOptionsList.find('li').not('.disabled').last();
+        var _this7 = this;
+
+        var $availableOptions = this.$materialOptionsList.find('li:visible').not('.disabled, .select-toggle-all');
+        var $firstOption = this.$materialOptionsList.find('li:visible').not('.disabled, .select-toggle-all').first();
+        var $lastOption = this.$materialOptionsList.find('li:visible').not('.disabled, .select-toggle-all').last();
         var anySelected = this.$materialOptionsList.find('li.selected').length > 0;
-        var $currentOption = anySelected ? this.$materialOptionsList.find('li.selected') : $lastOption;
-        var $matchedMaterialOption = $currentOption.is($firstOption) || !anySelected ? $currentOption : $currentOption.prev('li:not(.disabled)');
+        var $currentOption = anySelected ? this.$materialOptionsList.find('li.selected').first() : $lastOption;
+        var $prevOption = $currentOption.prev('li:visible:not(.disabled, .select-toggle-all)');
+        var $activeOption = $prevOption;
+        $availableOptions.each(function (key, el) {
+          if ($(el).hasClass(_this7.keyboardActiveClass)) {
+            $prevOption = $availableOptions.eq(key - 1);
+            $activeOption = $availableOptions.eq(key);
+          }
+        });
+        var $matchedMaterialOption = $currentOption.is($firstOption) || !anySelected ? $currentOption : $prevOption;
 
         this._selectSingleOption($matchedMaterialOption);
 
+        this._escapeKeyboardActiveOptions();
+
         if (!$matchedMaterialOption.find('input').is(':checked')) {
-          $matchedMaterialOption.removeClass('active');
+          $matchedMaterialOption.removeClass(this.keyboardActiveClass);
         }
 
-        if (!$matchedMaterialOption.next().hasClass('selected') && !$matchedMaterialOption.next().find('input').is(':checked')) {
-          $matchedMaterialOption.next().removeClass('active');
+        if (!$activeOption.hasClass('selected') && !$activeOption.find('input').is(':checked') && this.isMultiple) {
+          $activeOption.removeClass('active', this.keyboardActiveClass);
         }
 
-        $matchedMaterialOption.addClass('active');
+        $matchedMaterialOption.addClass(this.keyboardActiveClass);
+
+        if ($matchedMaterialOption.position()) {
+          this.$materialOptionsList.scrollTop(this.$materialOptionsList.scrollTop() + $matchedMaterialOption.position().top);
+        }
       }
     }, {
       key: "_handleEscKey",
       value: function _handleEscKey(materialSelect) {
+        this._escapeKeyboardActiveOptions();
+
         $(materialSelect).trigger('close');
       }
     }, {
       key: "_handleLetterKey",
       value: function _handleLetterKey(e) {
-        var _this5 = this;
+        var _this8 = this;
 
-        var filterQueryString = '';
-        var letter = String.fromCharCode(e.which).toLowerCase();
-        var nonLetters = Object.keys(this.keyCodes).map(function (key) {
-          return _this5.keyCodes[key];
-        });
-        var isLetterSearchable = letter && nonLetters.indexOf(e.which) === -1;
+        this._escapeKeyboardActiveOptions();
 
-        if (isLetterSearchable) {
-          filterQueryString += letter;
-          var $matchedMaterialOption = this.$materialOptionsList.find('li').filter(function (index, element) {
-            return $(element).text().toLowerCase().includes(filterQueryString);
-          }).first();
+        if (this.isSearchable) {
+          var isLetter = e.which > 46 && e.which < 91;
+          var isNumber = e.which > 93 && e.which < 106;
+          var isBackspace = e.which === 8;
+          if (isLetter || isNumber) this.$searchInput.find('input').val(e.key).focus();
+          if (isBackspace) this.$searchInput.find('input').val('').focus();
+        } else {
+          var filterQueryString = '';
+          var letter = String.fromCharCode(e.which).toLowerCase();
+          var nonLetters = Object.keys(this.keyCodes).map(function (key) {
+            return _this8.keyCodes[key];
+          });
+          var isLetterSearchable = letter && nonLetters.indexOf(e.which) === -1;
 
-          if (!this.isMultiple) {
-            this.$materialOptionsList.find('li').removeClass('active');
+          if (isLetterSearchable) {
+            filterQueryString += letter;
+            var $matchedMaterialOption = this.$materialOptionsList.find('li').filter(function (index, element) {
+              return $(element).text().toLowerCase().includes(filterQueryString);
+            }).first();
+
+            if (!this.isMultiple) {
+              this.$materialOptionsList.find('li').removeClass('active');
+            }
+
+            $matchedMaterialOption.addClass('active');
+
+            this._selectSingleOption($matchedMaterialOption);
           }
-
-          $matchedMaterialOption.addClass('active');
-
-          this._selectSingleOption($matchedMaterialOption);
         }
       }
     }, {
       key: "_onSearchInputKeyup",
       value: function _onSearchInputKeyup(e) {
         var $this = $(e.target);
+        var isTab = e.which === this.keyCodes.tab;
+        var isEsc = e.which === this.keyCodes.esc;
+        var isEnter = e.which === this.keyCodes.enter;
+        var isEnterWithShift = isEnter && e.shiftKey;
+        var isArrowUp = e.which === this.keyCodes.arrowUp;
+        var isArrowDown = e.which === this.keyCodes.arrowDown;
+
+        if (isArrowDown || isTab || isEsc || isArrowUp) {
+          this.$materialSelect.focus();
+
+          this._handleArrowDownKey();
+
+          return;
+        }
+
         var $ul = $this.closest('ul');
         var searchValue = $this.val();
         var $options = $ul.find('li span.filtrable');
+        var isOptionInList = false;
         $options.each(function () {
           var $option = $(this);
 
@@ -4013,8 +4103,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             } else {
               $option.hide().parent().hide();
             }
+
+            if (liValue.trim() === searchValue.toLowerCase()) {
+              isOptionInList = true;
+            }
           }
         });
+
+        if (isEnter) {
+          if (this.isEditable && !isOptionInList) {
+            this.addNewOption();
+            return;
+          }
+
+          if (isEnterWithShift) {
+            this._handleEnterWithShiftKey($this);
+          }
+
+          this.$materialSelect.trigger('open');
+          return;
+        }
+
+        if (searchValue && this.isEditable && !isOptionInList) {
+          this.$addOptionBtn.show();
+        } else {
+          this.$addOptionBtn.hide();
+        }
+
+        this._updateToggleAllOption();
       }
     }, {
       key: "_isToggleAllPresent",
@@ -4024,7 +4140,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       key: "_updateToggleAllOption",
       value: function _updateToggleAllOption() {
-        var $allOptionsButToggleAll = this.$materialOptionsList.find('li').not('.select-toggle-all, .disabled').find('[type=checkbox]');
+        var $allOptionsButToggleAll = this.$materialOptionsList.find('li').not('.select-toggle-all, .disabled, :hidden').find('[type=checkbox]');
         var $checkedOptionsButToggleAll = $allOptionsButToggleAll.filter(':checked');
         var isToggleAllChecked = this.$toggleAll.find('[type=checkbox]').is(':checked');
 
@@ -4069,10 +4185,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       key: "_setValueToMaterialSelect",
       value: function _setValueToMaterialSelect() {
-        var _this6 = this;
+        var _this9 = this;
 
         var value = '';
-        var optionsSelected = 'options selected';
+        var optionsSelected = this.optionsSelectedLabel;
         var itemsCount = this.valuesSelected.length;
 
         if (this.options.language.active && this.$toggleAll) {
@@ -4090,7 +4206,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         this.valuesSelected.map(function (el) {
-          return value += ", ".concat(_this6.$nativeSelect.find('option').eq(el).text().replace(/  +/g, ' ').trim());
+          return value += ", ".concat(_this9.$nativeSelect.find('option').eq(el).text().replace(/  +/g, ' ').trim());
         });
         itemsCount >= 5 ? value = "".concat(itemsCount, " ").concat(optionsSelected) : value = value.substring(2);
         value.length === 0 && this.mainLabel.length === 0 ? value = this.$nativeSelect.find('option:disabled').eq(0).text() : null;
@@ -4372,15 +4488,19 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 (function ($) {
-  var INPUT_DATA = {};
-  var DATA_COLOR = '';
-  var BUTTON_X_COLOR = '';
-  var BUTTON_X_BLUR_COLOR = '#ced4da';
-  var INPUT_FOCUS = '1px solid #4285f4';
-  var INPUT_BLUR = '1px solid #ced4da';
-  var INPUT_FOCUS_SHADOW = '0 1px 0 0 #4285f4';
-  var INPUT_BLUR_SHADOW = '';
-  var ENTER_CHAR_CODE = 13;
+  var inputData = {};
+  var dataColor = '';
+  var buttonCloseColor = '';
+  var buttonCloseBlurColor = '#ced4da';
+  var inputFocus = '1px solid #4285f4';
+  var inputBlur = '1px solid #ced4da';
+  var inputFocusShadow = '0 1px 0 0 #4285f4';
+  var inputBlurShadow = '';
+  var enterCharCode = 13;
+  var arrowUpCharCode = 38;
+  var arrowDownCharCode = 40;
+  var count = -1;
+  var nextScrollHeight = -45;
 
   var mdbAutocomplete =
   /*#__PURE__*/
@@ -4389,14 +4509,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _classCallCheck(this, mdbAutocomplete);
 
       this.defaults = {
-        data: INPUT_DATA,
-        dataColor: DATA_COLOR,
-        xColor: BUTTON_X_COLOR,
-        xBlurColor: BUTTON_X_BLUR_COLOR,
-        inputFocus: INPUT_FOCUS,
-        inputBlur: INPUT_BLUR,
-        inputFocusShadow: INPUT_FOCUS_SHADOW,
-        inputBlurShadow: INPUT_BLUR_SHADOW
+        data: inputData,
+        dataColor: dataColor,
+        closeColor: buttonCloseColor,
+        closeBlurColor: buttonCloseBlurColor,
+        inputFocus: inputFocus,
+        inputBlur: inputBlur,
+        inputFocusShadow: inputFocusShadow,
+        inputBlurShadow: inputBlurShadow
       };
       this.$input = input;
       this.options = this.assignOptions(options);
@@ -4417,8 +4537,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
     }, {
       key: "assignOptions",
-      value: function assignOptions(newOptions) {
-        return $.extend({}, this.defaults, newOptions);
+      value: function assignOptions(options) {
+        return $.extend({}, this.defaults, options);
       }
     }, {
       key: "setData",
@@ -4455,6 +4575,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var _this3 = this;
 
         this.$input.on('keyup', function (e) {
+          if (e.which === enterCharCode) {
+            if (!_this3.options.data.includes(_this3.$input.val())) {
+              _this3.options.data.push(_this3.$input.val());
+            }
+
+            _this3.$autocompleteWrap.find('.selected').trigger('click');
+
+            _this3.$autocompleteWrap.empty();
+
+            _this3.inputBlur();
+
+            count = -1;
+            nextScrollHeight = -45;
+            return count;
+          }
+
           var $inputValue = _this3.$input.val();
 
           _this3.$autocompleteWrap.empty();
@@ -4467,21 +4603,51 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 _this3.$autocompleteWrap.append(option);
               }
             }
-          }
 
-          if (e.which === ENTER_CHAR_CODE) {
-            _this3.$autocompleteWrap.children(':first').trigger('click');
+            var $ulList = _this3.$autocompleteWrap;
 
-            _this3.$autocompleteWrap.empty();
-          }
+            var $ulItems = _this3.$autocompleteWrap.find('li');
 
-          if ($inputValue.length === 0) {
-            _this3.$input.parent().find('.mdb-autocomplete-clear').css('visibility', 'hidden');
+            var nextItemHeight = $ulItems.eq(count).outerHeight();
+            var previousItemHeight = $ulItems.eq(count - 1).outerHeight();
+
+            if (e.which === arrowDownCharCode) {
+              if (count > $ulItems.length - 2) {
+                count = -1;
+                $ulItems.scrollTop(0);
+                nextScrollHeight = -45;
+                return;
+              } else {
+                count++;
+              }
+
+              nextScrollHeight += nextItemHeight;
+              $ulList.scrollTop(nextScrollHeight);
+              $ulItems.eq(count).addClass('selected');
+            } else if (e.which === arrowUpCharCode) {
+              if (count < 1) {
+                count = $ulItems.length;
+                $ulList.scrollTop($ulList.prop('scrollHeight'));
+                nextScrollHeight = $ulList.prop('scrollHeight') - nextItemHeight;
+              } else {
+                count--;
+              }
+
+              nextScrollHeight -= previousItemHeight;
+              $ulList.scrollTop(nextScrollHeight);
+              $ulItems.eq(count).addClass('selected');
+            }
+
+            if ($inputValue.length === 0) {
+              _this3.$clearButton.css('visibility', 'hidden');
+            } else {
+              _this3.$clearButton.css('visibility', 'visible');
+            }
+
+            _this3.$autocompleteWrap.children().css('color', _this3.options.dataColor);
           } else {
-            _this3.$input.parent().find('.mdb-autocomplete-clear').css('visibility', 'visible');
+            _this3.$clearButton.css('visibility', 'hidden');
           }
-
-          _this3.$autocompleteWrap.children().css('color', _this3.options.dataColor);
         });
       }
     }, {
@@ -4503,6 +4669,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var _this5 = this;
 
         this.$clearButton.on('click', function (e) {
+          count = -1;
+          nextScrollHeight = -45;
           e.preventDefault();
           var $this = $(e.currentTarget);
           $this.parent().find('.mdb-autocomplete').val('');
@@ -4521,11 +4689,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         if (this.$input.hasClass('mdb-autocomplete')) {
           this.$input.on('click keyup', function (e) {
             e.preventDefault();
-            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', _this6.options.xColor);
+            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', _this6.options.closeColor);
           });
           this.$input.on('blur', function (e) {
             e.preventDefault();
-            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', _this6.options.xBlurColor);
+            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', _this6.options.closeBlurColor);
           });
         }
       }
@@ -4570,12 +4738,68 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 "use strict";
 
-var toggler = document.getElementsByClassName("rotate");
-var i;
+(function ($) {
+  $.fn.mdbTreeview = function () {
+    var $this = $(this);
 
-for (i = 0; i < toggler.length; i++) {
-  toggler[i].addEventListener("click", function () {
-    this.parentElement.querySelector(".nested").classList.toggle("active");
-    this.classList.toggle("down");
-  });
-}
+    if ($this.hasClass('treeview')) {
+      var $toggler = $this.find('.rotate');
+      $.each($toggler, function (e) {
+        $($toggler[e]).off('click');
+        $($toggler[e]).on('click', function () {
+          var $this = $(this);
+          $this.siblings('.nested').toggleClass('active');
+          $this.toggleClass('down');
+        });
+      });
+    }
+
+    if ($this.hasClass('treeview-animated')) {
+      var $elements = $this.find('.treeview-animated-element');
+      var $closed = $this.find('.closed');
+      $this.find('.nested').hide();
+      $closed.off('click');
+      $closed.on('click', function () {
+        var $this = $(this);
+        var $target = $this.siblings('.nested');
+        var $pointer = $this.children('.fa-angle-right');
+        $this.toggleClass('open');
+        $pointer.toggleClass('down');
+        !$target.hasClass('active') ? $target.addClass('active').slideDown() : $target.removeClass('active').slideUp();
+        return false;
+      });
+      $elements.off('click');
+      $elements.on('click', function () {
+        var $this = $(this);
+        $this.hasClass('opened') ? $this.removeClass('opened') : ($elements.removeClass('opened'), $this.addClass('opened'));
+      });
+    }
+
+    if ($this.hasClass('treeview-colorful')) {
+      var _$elements = $this.find('.treeview-colorful-element');
+
+      var $header = $this.find('.treeview-colorful-items-header');
+      $this.find('.nested').hide();
+      $header.off('click');
+      $header.on('click', function () {
+        var $this = $(this);
+        var $target = $this.siblings('.nested');
+        var $pointerPlus = $this.children('.fa-plus-circle');
+        var $pointerMinus = $this.children('.fa-minus-circle');
+        $this.toggleClass('open');
+        $pointerPlus.removeClass('fa-plus-circle');
+        $pointerPlus.addClass('fa-minus-circle');
+        $pointerMinus.removeClass('fa-minus-circle');
+        $pointerMinus.addClass('fa-plus-circle');
+        !$target.hasClass('active') ? $target.addClass('active').slideDown() : $target.removeClass('active').slideUp();
+      });
+
+      _$elements.off('click');
+
+      _$elements.on('click', function () {
+        var $this = $(this);
+        $this.hasClass('opened') ? _$elements.removeClass('opened') : (_$elements.removeClass('opened'), $this.addClass('opened'));
+      });
+    }
+  };
+})(jQuery);

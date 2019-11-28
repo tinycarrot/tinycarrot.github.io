@@ -41,7 +41,6 @@
 
   &.wide {
     width: $sidenav-width;
-    overflow: visible;
     transition-property: top, bottom, width;
     transition-duration: .2s, .2s, .35s;
     transition-timing-function: linear, linear, ease;

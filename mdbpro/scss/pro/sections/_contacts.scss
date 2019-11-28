@@ -2,16 +2,18 @@
 .contact-section {
   .form {
     .btn-floating {
-      float: right;
       position: relative;
       bottom: $contact-section-form-btn-floating-bottom;
+      float: right;
       margin-right: 0;
     }
   }
   .contact {
-    border-radius: 0 $md-card-border-radius $md-card-border-radius 0;
     background-color: $contact-section-bgc;
-    .fas, .fab, .far {
+    border-radius: 0 $md-card-border-radius $md-card-border-radius 0;
+    .fas,
+    .fab,
+    .far {
       color: $contact-section-fa-color;
     }
   }
