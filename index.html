@@ -5,7 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>Material Design Bootstrap</title>
+		<title>Fake iAP Guide</title>
 		<!-- Font Awesome -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 		<!-- Bootstrap core CSS -->
@@ -20,46 +20,152 @@
 
 		<!-- Start your project here-->
 		<!--Main Navigation-->
-		<header>
+		  <!-- Navigation -->
+			  <header>
 
-			<nav class="navbar navbar-expand-lg navbar-dark elegant-color scrolling-navbar">
-				<a class="navbar-brand" href="#">
-					<strong>
-						<i class="fas fa-carrot fa-lg ml-2"></i>
-					</strong>
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
-							<a class="nav-link" href="#quantumultx">Cài đặt Quantumult X
-								<span class="sr-only">(current)</span></a>
+				<style>
+				 .navbar .navbar-brand img {
+				  height: 20px;
+				}
+
+				.navbar .navbar-brand {
+				  padding-top: 0;
+				}
+
+				.navbar .nav-link {
+				  color: #444343!important;
+				}
+
+				.navbar .button-collapse {
+				  padding-top: 1px;
+				}
+
+				.card-intro .card-body {
+				  padding-top: 1.5rem;
+				  padding-bottom: 1.5rem;
+				  border-radius: 0 !important;
+				}
+
+				.card-intro .card-body h1 {
+				  margin-bottom: 0;
+				}
+
+				.card-intro {
+				  margin-top: 64px;
+				}
+
+				@media (max-width: 450px) {
+				  .card-intro {
+					margin-top: 56px;
+				  }
+				}
+
+				@media (min-width: 1441px) {
+				  .card-intro {
+					padding-left: 0 !important;
+				  }
+				}
+				</style>
+
+				<!-- Navbar -->
+				<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+				  <div class="container">
+
+					<!-- Brand -->
+					<a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
+					  <img src="https://mdbootstrap.com/wp-content/uploads/2018/06/logo-mdb-jquery-small.png" alt="Logo">
+					</a>
+
+					<!-- Collapse -->
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					  <span class="navbar-toggler-icon"></span>
+					</button>
+
+					<!-- Links -->
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+					  <!-- Left -->
+					  <ul class="navbar-nav mr-auto smooth-scroll">
+						<li class="nav-item">
+						  <a class="nav-link waves-effect" href="#quantumultx">Bước 1</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Cài đặt Cấu hình</a>
+						  <a class="nav-link waves-effect" href="#quantumultx-config">Bước 2</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Tuỳ chỉnh Quantumult X</a>
+						  <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/react/" target="_blank">React</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Donate</a>
+						  <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/vue/" target="_blank">Vue</a>
 						</li>
-					</ul>
-					<ul class="navbar-nav nav-flex-icons">
+					  </ul>
+
+					  <!-- Right -->
+					  <ul class="navbar-nav nav-flex-icons">
 						<li class="nav-item">
-							<a class="nav-link" href="https://discord.gg/4w6Xwnv" target="_blank">
-								<i class="fab fa-sm fa-discord"> Tham gia room Discord</i>
-							</a>
+						  <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
+							<i class="fab fa-facebook-f"></i>
+						  </a>
+						</li> 
+						<li class="nav-item">
+						  <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">
+							<i class="fab fa-twitter"></i>
+						  </a>
 						</li>
-					</ul>
+						<li class="nav-item">
+						  <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link waves-effect"
+							target="_blank">
+							<i class="fab fa-github"></i>
+						  </a>
+						</li>
+						<li class="nav-item">
+						  <a href="https://mdbootstrap.com/docs/jquery/newsletter/"
+							class="nav-link border border-light rounded waves-effect mr-2" target="_blank">
+							<i class="fas fa-envelope mr-1"></i>Newsletter
+						  </a>
+						</li>
+					  </ul>
+
+					</div>
+
+				  </div>
+				</nav>
+				<!-- Navbar -->
+
+				<!-- Intro -->
+				<div class="card card-intro blue-gradient">
+
+				  <div class="card-body white-text rgba-black-light text-center">
+
+					<!--Grid row-->
+					<div class="row d-flex justify-content-center">
+
+					  <!--Grid column-->
+					  <div class="col-md-6">
+
+						<p class="h5 mb-2">
+						  This is MDB Blog
+						</p>
+
+						<p class="mb-0">The latest news from the world of internet technologies.</p>
+
+					  </div>
+					  <!--Grid column-->
+
+					</div>
+					<!--Grid row-->
+
+				  </div>
+
 				</div>
-			</nav>
+				<!-- Intro -->
 
-		</header>
-		<!--Main Navigation-->
-		<!-- Jumbotron -->
+			  </header>
+			  <!-- Navigation -->
+				<!--Main Navigation-->
+
+		<!-- Jumbotron 1 - Quantumult setup -->
 		<div class="jumbotron elegant-color-dark text-center" id="quantumultx">
 			<!-- Title -->
 			<h3>
@@ -77,7 +183,7 @@
 				<div class="col-xl-7 pb-2 text-left">
 
 					<p class="card-text">
-						<p>
+					<p>
 							<span class="badge badge-pill badge-danger">1</span>
 							Thoát Account hiện tại trong App Store ra.</p>
 						<p>
@@ -136,7 +242,90 @@
 				<!-- / Collapsible element -->
 			</div>
 		</div>
-		<!-- Jumbotron -->
+		<!-- /Jumbotron 1 - Quantumult setup -->
+
+		<!-- Jumbotron 2 - Quantumult Config -->
+		<div class="jumbotron elegant-color-dark text-center" id="quantumultx-config">
+			<!-- Title -->
+			<h3>
+				<strong>BƯỚC 2</strong><br>
+				<small class="text-muted">CâCấu hình file cònig</small>
+			</h3>
+			<img src="https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/ed/7c/a3/ed7ca3d6-16fe-b508-7882-f287389476a0/source/350x350bb.jpg" class="img-fluid icon" alt="Quantumult X Image">
+
+			<!-- Title -->
+			<h2 class="card-title my-0 h5">Quantumult X</h2>
+			<!-- Grid row -->
+			<div class="row d-flex justify-content-center">
+
+				<!-- Grid column -->
+				<div class="col-xl-7 pb-2 text-left">
+
+					<p class="card-text">
+					<p>
+							<span class="badge badge-pill badge-danger">1</span>
+							Thoát Account hiện tại trong App Store ra.</p>
+						<p>
+							<span class="badge badge-pill badge-danger">2</span>
+							Lấy Account bên dưới và đăng nhập vào App Store.</p>
+						<p>
+							<span class="badge badge-pill badge-danger">3</span>
+							Tìm ứng dụng Quantumult X trong mục đã mua hoặc ấn vào nút
+							<strong>[TẢI QUANTUMULT X]</strong>
+							bên dưới.</p>
+						<p>
+							<span class="badge badge-pill orange">
+								<i class="fas fa-exclamation"></i>
+							</span>Nếu App hiện giá tiền thì cứ ấn mua sẽ được.</p>
+
+					</p>
+
+				</div>
+				<!-- Grid column -->
+
+			</div>
+			<!-- Grid row -->
+
+			<hr class="my-1">
+
+			<div class="pt-1">
+				<!-- Collapse buttons -->
+				<div>
+					<a class="btn btn-outline-primary btn-sm waves-effect" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+						Lấy Account<i class="fas fa-carrot ml-1"></i>
+					</a>
+				</div>
+				<!-- / Collapse buttons -->
+
+				<!-- Collapsible element -->
+				<div class="collapse" id="collapseExample">
+					<div class="mt-3">
+						<!-- Material input -->
+						<div class="md-form">
+							<input value="quantumultx@icloud.com" type="text" id="appleid01" class="form-control" onclick="this.setSelectionRange(0, this.value.length)">
+							<label for="appleid01">Apple ID 01</label>
+						</div>
+						<div class="md-form">
+							<input value="mCq@ExAmjykAE2XCrHnuqL" type="text" id="applepass01" class="form-control" onclick="this.setSelectionRange(0, this.value.length)">
+							<label for="applepass01">Pass ID 01</label>
+						</div>
+						<a class="btn btn-outline-primary btn-sm waves-effect" href="itms-apps://apps.apple.com/updates" target="_blank">
+							mở appstore<i class="fab fa-app-store ml-1"></i>
+						</a>
+						<button type="button" class="btn btn-outline-primary btn-sm waves-effect">
+							<a href="https://apps.apple.com/vn/app/quantumult-x/id1443988620" target="_blank">tải Quantumult X</a>
+							<i class="fas fa-download ml-1"></i>
+						</button>
+					</div>
+				</div>
+				<!-- / Collapsible element -->
+			</div>
+	</div>
+		<!-- /Jumbotron 2 - Quantumult Config -->
+
+
+
+
 
 		<!--Section: Content-->
 		<section class="px-md-5 mx-md-5 py-5 text-center white-text elegant-color z-depth-1">
@@ -149,8 +338,8 @@
 		<!--Section: Content-->
 
 		<!-- Start your project here-->
+	<!-- SCRIPTS -->
 
-		<!-- SCRIPTS -->
 		<!-- JQuery -->
 		<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 		<!-- Bootstrap tooltips -->
@@ -159,6 +348,7 @@
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<!-- MDB core JavaScript -->
 		<script type="text/javascript" src="js/mdb.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 
 </html>
