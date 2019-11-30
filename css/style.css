@@ -9,3 +9,19 @@ body{
 }
 }
 
+.img-preview {
+	height: 200px;
+	max-width: 100%;
+}
+
+.list-group {
+overflow-x: scroll;
+white-space: nowrap;
+max-width: 1200px;
+height: 270px;
+padding: 1rem;
+}
+
+.jumbotron {
+	max-width: 1200px;
+}
